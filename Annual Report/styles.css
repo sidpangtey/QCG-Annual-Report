@@ -300,14 +300,6 @@ section.tight{padding:56px 0}
 .page-hero{padding:72px 0 56px}
 .crumb{font-size:14px;font-weight:500;color:var(--ink-55);text-decoration:none}
 .crumb:hover{color:var(--accent)}
-.switcher{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
-.switcher a{
-  font-size:14px;font-weight:500;text-decoration:none;
-  border:1px solid var(--ink-12);border-radius:999px;padding:8px 16px;color:var(--ink-70);
-  transition:all .15s;
-}
-.switcher a:hover{border-color:var(--ink-30);color:var(--ink)}
-.switcher a.current{background:var(--ink);color:#fff;border-color:var(--ink)}
 .two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
 @media(max-width:860px){.two-col{grid-template-columns:1fr}}
 .callout{border-left:3px solid var(--accent);padding:8px 0 8px 24px;margin:32px 0 0;font-size:17px;color:var(--ink-70);border-radius:2px}
@@ -476,12 +468,9 @@ footer{border-top:1px solid var(--ink-12);padding:44px 0;font-size:13.5px;color:
 .hero-dark .photo{background:rgba(255,255,255,.04)}
 .hero-dark .photo::after{background:linear-gradient(180deg,rgba(24,27,35,.12),rgba(24,27,35,.28))}
 
-/* dark hero — industry page extras (crumb, switcher chips) */
+/* dark hero — industry page extras (crumb) */
 .hero-dark .crumb{color:rgba(255,255,255,.6)}
 .hero-dark .crumb:hover{color:#f0705f}
-.hero-dark .switcher a{color:rgba(255,255,255,.72);border-color:rgba(255,255,255,.24)}
-.hero-dark .switcher a:hover{border-color:rgba(255,255,255,.5);color:#fff}
-.hero-dark .switcher a.current{background:#fff;color:var(--ink);border-color:#fff}
 
 
 /* ============================================================
@@ -508,8 +497,7 @@ footer{border-top:1px solid var(--ink-12);padding:44px 0;font-size:13.5px;color:
 
 /* ---- industry hero: compact to fit above the fold (~800px) ---- */
 .page-hero.hero-dark{padding:32px 0 40px}
-.page-hero.hero-dark .switcher{margin-top:14px}
-.page-hero.hero-dark .hero-grid{margin-top:22px!important}
+.page-hero.hero-dark .hero-grid{margin-top:28px!important}
 .page-hero.hero-dark h1{margin-top:10px}
 .page-hero.hero-dark .lede{margin-top:16px!important}
 .page-hero.hero-dark .meta-strip{margin-top:26px}

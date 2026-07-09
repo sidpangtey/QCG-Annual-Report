@@ -36,6 +36,7 @@
           <a role="menuitem" href="#move-up-curve">07 · Move up the curve</a>
         </div>
       </div>
+      <a href="#get-report">Get the report</a>
     </div>
     <div class="nav-ctas">
       <a class="nav-cta-ghost" href="https://scanova.io/" target="_blank" rel="noopener">Explore Scanova</a>
@@ -48,8 +49,7 @@
 <header class="page-hero hero-dark" id="page-hero">
   <div class="wrap">
     <a class="crumb" href="index.html">← All industries · QR Performance Benchmarks 2026</a>
-    <div class="switcher" id="switcher" style="margin-top:18px"></div>
-    <div class="hero-grid" style="margin-top:30px">
+    <div class="hero-grid" style="margin-top:28px">
       <div>
         <p class="eyebrow" id="h-eyebrow"></p>
         <h1 style="margin-top:14px;max-width:20ch" id="h-title"></h1>
@@ -332,22 +332,14 @@ document.getElementById("h-meta").innerHTML = `
   <div><span class="num">${D.scansDisplay}</span><span class="label">Total scans</span></div>
   <div><span class="num" data-count="${D.meanActive}">0</span><span class="label">Average scans / code</span></div>`;
 
-const sw = document.getElementById("switcher");
-INDUSTRY_ORDER.forEach(k=>{
-  const a = document.createElement("a");
-  a.href = "industry.html?i="+k;
-  a.textContent = REPORT.industries[k].shortName;
-  if(k===key) a.className = "current";
-  sw.appendChild(a);
-});
-
 /* ---------- nav dropdowns: industries (data-driven) + chapters ---------- */
 const navIndustriesMenu = document.getElementById("nav-drop-industries-menu");
 INDUSTRY_ORDER.forEach(k=>{
+  const d = REPORT.industries[k];
   const a = document.createElement("a");
   a.setAttribute("role","menuitem");
   a.href = "industry.html?i="+k;
-  a.textContent = REPORT.industries[k].name;
+  a.innerHTML = `${d.name} <span>Avg ${fmt(d.meanActive)} scans/code · ${d.scansDisplay} scans</span>`;
   if(k===key) a.className = "current";
   navIndustriesMenu.appendChild(a);
 });
@@ -412,8 +404,8 @@ const bScale = document.getElementById("b-scale");
     bScale.appendChild(t);
   });
   [
-    {label:"Typical code (median)", v:D.medianActive, cls:"is-red"},
-    {label:"Segment average", v:D.meanActive, cls:"is-hollow"},
+    {label:"Typical code (median)", v:D.medianActive, cls:"is-hollow"},
+    {label:"Segment average", v:D.meanActive, cls:"is-red"},
     {label:"Record code", v:D.maxCode, cls:""}
   ].forEach(m=>{
     const el = document.createElement("div");
