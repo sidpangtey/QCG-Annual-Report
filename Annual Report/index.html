@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scanova QR Code Benchmarks by Industry | 2026 Report</title>
+<meta name="description" content="Scanova QR Code Benchmarks: the typical QR Code earns 8–23 scans by industry, and the top 5% drive 78–95% of all scans. First-party data from 69.9 million scans across 36,810 QR Codes and 211 brands in CPG, Manufacturing, Hotels & Resorts, and F&B Manufacturing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="logo-icon-red.svg" alt="Scanova" width="26" height="26"><span>Scanova QR Benchmarks</span></a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#instrument">Benchmark</a>
+      <div class="nav-drop" id="nav-drop">
+        <button class="nav-drop-btn" aria-haspopup="true" aria-expanded="false" id="nav-drop-btn">
+          Industries <span class="caret" aria-hidden="true"></span>
+        </button>
+        <div class="nav-drop-menu" role="menu" id="nav-drop-menu">
+          <a role="menuitem" href="industry.html?i=cpg">CPG &amp; Consumer Goods <span>Avg 6,781 scans/code · 46.9M scans</span></a>
+          <a role="menuitem" href="industry.html?i=mi">Manufacturing &amp; Industrial <span>Avg 641 scans/code · 9.3M scans</span></a>
+          <a role="menuitem" href="industry.html?i=hotels">Hotels &amp; Resorts <span>Avg 2,096 scans/code · 7.4M scans</span></a>
+          <a role="menuitem" href="industry.html?i=fnb">F&amp;B Manufacturing <span>Avg 1,487 scans/code · 6.4M scans</span></a>
+        </div>
+      </div>
+      <a href="#findings">Findings</a>
+      <a href="#methodology">Methodology</a>
+    </div>
+    <div class="nav-ctas">
+      <a class="nav-cta-ghost" href="https://scanova.io/" target="_blank" rel="noopener">Explore Scanova</a>
+      <a class="nav-cta" href="https://app.scanova.io/auth/register" target="_blank" rel="noopener">Start Free Trial</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero hero-dark" id="overview">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">The Scanova QR Code Benchmarks · Last updated: May 2026</p>
+      <h1 style="margin-top:16px;max-width:18ch">What do <span class="accent">successful</span> QR Code scans look like?</h1>
+      <p class="lede" style="margin-top:22px">
+        The typical QR Code earns 8–23 scans depending on industry — and the top 5% of codes drive 78–95% of all scans.
+        Every brand manager putting a QR Code on packaging, in a kiosk, or on a label asks the same question:
+        is this working? We analyzed every scan on Scanova till date across CPG, Manufacturing, Hotels &amp; Resorts,
+        and F&amp;B Manufacturing to publish the benchmarks nobody else can.
+      </p>
+      <div class="meta-strip">
+        <div><span class="num" data-count="4">0</span><span class="label">Industries</span></div>
+        <div><span class="num" data-count="211">0</span><span class="label">Brands analyzed</span></div>
+        <div><span class="num" data-count="36810">0</span><span class="label">QR Codes</span></div>
+        <div><span class="num" data-count="69.9" data-suffix="M">0</span><span class="label">Total scans</span></div>
+      </div>
+      <div class="panel-ctas" style="margin-top:40px">
+        <a class="btn btn-solid" href="#industries">Find your industry ↓</a>
+        <a class="btn btn-ghost" href="#get-reports">Download the reports</a>
+      </div>
+    </div>
+    <div class="photo">
+      <img src="img/hero-main.jpg" alt="Customer scanning a QR Code on product packaging with a smartphone" decoding="async">
+    </div>
+  </div>
+</header>
+
+<!-- ============ BENCHMARK INSTRUMENT ============ -->
+<section class="tight band" id="instrument">
+  <div class="wrap">
+    <p class="eyebrow">The benchmark instrument</p>
+    <h2 style="max-width:24ch">Median, average, and record scans per code, by industry</h2>
+    <p class="lede">Pick an industry. The median shows scans a typical code gets. The average shows the number of scans a few top performers get. The record shows what the record high performance looks like, and how much room you have to grow.</p>
+
+    <div class="instrument reveal">
+      <div class="instrument-head">
+        <span class="instrument-title">Scans per QR Code · active codes · all-time</span>
+        <div class="seg" id="instr-seg" role="group" aria-label="Choose industry"></div>
+      </div>
+      <div class="scale" id="instr-scale" aria-live="polite"></div>
+      <p class="instrument-note" id="instr-note"></p>
+      <p class="foot-note" style="margin-top:14px">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRY TABS ============ -->
+<section id="industries">
+  <div class="wrap">
+    <p class="eyebrow">Pick your industry</p>
+    <h2 style="max-width:20ch">Four industries. Four very different scan economies.</h2>
+
+    <div class="tabs" role="tablist" id="industry-tabs"></div>
+    <div id="industry-panels"></div>
+  </div>
+</section>
+
+<!-- ============ CROSS-INDUSTRY COMPARISON ============ -->
+<section class="tight band">
+  <div class="wrap">
+    <p class="eyebrow">Side by side</p>
+    <h2 style="max-width:22ch">Every industry benchmark in one view</h2>
+    <p class="lede">Compare your industry against the other three. The median is the benchmark to measure against. The record is the QR Code performance ceiling.</p>
+    <div class="tbl-scroll reveal">
+      <table class="tbl" id="compare-table">
+        <thead>
+          <tr>
+            <th>Industry</th>
+            <th class="r">Brands</th>
+            <th class="r">Live codes</th>
+            <th class="r">Total scans</th>
+            <th class="r">Median / code</th>
+            <th class="r">Record code</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="foot-note">Median and mean computed on active codes (≥1 scan) in the live portfolio.</p>
+  </div>
+</section>
+
+<!-- ============ UNIVERSAL FINDINGS ============ -->
+<section id="findings">
+  <div class="wrap">
+    <p class="eyebrow">What the data shows</p>
+    <h2 style="max-width:20ch">Five findings that hold in every industry</h2>
+    <div id="findings-list" style="margin-top:36px"></div>
+  </div>
+</section>
+
+<!-- ============ METHODOLOGY ============ -->
+<section class="band-ink" id="methodology">
+  <div class="wrap">
+    <p class="eyebrow">Why this data is different</p>
+    <h2 style="max-width:24ch">Scanova's measured internal data based on real industry insights</h2>
+    <p class="lede">Most QR Code reports rely on marketer surveys. This one is built on scan records from the Scanova platform.</p>
+    <div class="cards grid-2">
+      <div class="card" style="background:transparent;border-color:rgba(255,255,255,.18)">
+        <span class="k">First-party</span>
+        <h3 style="color:#fff">Real scan events</h3>
+        <p style="color:rgba(255,255,255,.65)">Every number comes from scan events recorded on the Scanova platform. Nothing comes from third-party panels or simple market surveys.</p>
+      </div>
+      <div class="card" style="background:transparent;border-color:rgba(255,255,255,.18)">
+        <span class="k">All-time</span>
+        <h3 style="color:#fff">Lifetime scan data</h3>
+        <p style="color:rgba(255,255,255,.65)">QR Codes are tracked from the day they were first created, some created over 10 years ago. This lets us measure how scans build up over a code's lifetime.</p>
+      </div>
+      <div class="card" style="background:transparent;border-color:rgba(255,255,255,.18)">
+        <span class="k">Reconciled</span>
+        <h3 style="color:#fff">Every number adds up</h3>
+        <p style="color:rgba(255,255,255,.65)">Scan totals include scan history from deleted codes too. Accounts with record high scans are disclosed, and every benchmark leads with the median for a realistic picture.</p>
+      </div>
+      <div class="card" style="background:transparent;border-color:rgba(255,255,255,.18)">
+        <span class="k">Verifiable</span>
+        <h3 style="color:#fff">Data no one else holds</h3>
+        <p style="color:rgba(255,255,255,.65)">Industry classification, code-level use-case analysis, and account tenure come from over a decade of running the platform. No other online QR Code generator has this dataset.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="band" id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Frequently asked</p>
+    <h2 style="max-width:24ch">QR Code benchmarks, answered</h2>
+    <p class="lede">Straight answers to the questions brand and marketing teams ask about QR Code performance, drawn from the first-party data on this page.</p>
+    <div class="faq" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- ============ LEAD CAPTURE ============ -->
+<section id="get-reports">
+  <div class="wrap lead">
+    <div>
+      <p class="eyebrow">Take it with you</p>
+      <h2 style="max-width:20ch">Get the shareable PDF for your team, by industry</h2>
+      <p class="lede">Each report is a designed PDF you can share with your team. It covers the full benchmarks for your industry, how top performers differ from the rest, which use cases drive the most scans, and where the untapped opportunities are.</p>
+      <p class="small" style="margin-top:14px;max-width:60ch">Prefer to keep browsing? All the benchmarks above are free to explore — this PDF is just a shareable version for your team.</p>
+      <ul class="insight-list" style="margin-top:28px">
+        <li><strong>Benchmark tables</strong> — median, mean, and ceiling for codes and accounts</li>
+        <li><strong>Use-case league tables</strong> — what's deployed vs what actually performs</li>
+        <li><strong>The opportunity map</strong> — high-return use cases your peers haven't touched</li>
+      </ul>
+    </div>
+    <div>
+      <!-- INTEGRATION POINT: wire to your marketing-automation endpoint -->
+      <form class="lead-form" id="lead-form" novalidate>
+        <div>
+          <label for="lf-name">Full name</label>
+          <input id="lf-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div>
+          <label for="lf-email">Work email</label>
+          <input id="lf-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div>
+          <label for="lf-company">Company</label>
+          <input id="lf-company" name="company" type="text" autocomplete="organization" required>
+        </div>
+        <div>
+          <label for="lf-industry">Which report do you want?</label>
+          <select id="lf-industry" name="industry" required>
+            <option value="">Select an industry…</option>
+            <option value="cpg">CPG &amp; Consumer Goods</option>
+            <option value="mi">Manufacturing &amp; Industrial</option>
+            <option value="hotels">Hotels &amp; Resorts</option>
+            <option value="fnb">Food &amp; Beverage Manufacturing</option>
+            <option value="all">All four reports</option>
+          </select>
+        </div>
+        <button type="submit">Send me the report</button>
+        <p class="fine">We'll email the PDF and, occasionally, benchmark updates. No spam — unsubscribe anytime.</p>
+      </form>
+      <div class="lead-success" id="lead-success">
+        <h3>Check your inbox</h3>
+        <p style="color:var(--ink-70);margin-top:8px">Your report is on its way. While you wait, explore the industry benchmarks on this page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCANOVA CTA BAND ============ -->
+<section class="cta-band">
+  <div class="wrap cta-band-grid">
+    <div class="cta-cell">
+      <div class="cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h3v3h-3zM17 17h3v3h-3z"/></svg>
+      </div>
+      <div>
+        <h3>Ready to build QR Codes that beat your industry's benchmark?</h3>
+        <a class="cta-btn-solid" href="https://app.scanova.io/auth/register" target="_blank" rel="noopener">Start Free Trial →</a>
+      </div>
+    </div>
+    <div class="cta-band-divider" aria-hidden="true"></div>
+    <div class="cta-cell">
+      <div class="cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M4 12v4a2 2 0 0 0 2 2h1v-6H5"/><path d="M20 12v4a2 2 0 0 1-2 2h-1v-6h2"/><path d="M17 18v1a2 2 0 0 1-2 2h-2"/></svg>
+      </div>
+      <div>
+        <h3>Not sure if Scanova fits your use case?</h3>
+        <a class="cta-btn-white" href="https://trycon.dayschedule.com/qr-code-generator-demo" target="_blank" rel="noopener">Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Scanova · Annual QR Code Performance Report</span>
+    <span class="mono" id="footer-note"></span>
+  </div>
+</footer>
+
+<script src="report-data.js"></script>
+<script>
+/* ---------- nav dropdown ---------- */
+(function(){
+  const drop = document.getElementById("nav-drop");
+  const btn = document.getElementById("nav-drop-btn");
+  btn.addEventListener("click", e=>{
+    e.stopPropagation();
+    const open = drop.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+  });
+  document.addEventListener("click", e=>{
+    if(!drop.contains(e.target)){ drop.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  });
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape"){ drop.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  });
+})();
+
+/* ---------- footer meta ---------- */
+document.getElementById("footer-note").textContent = REPORT.meta.dataNote;
+
+/* ---------- FAQ (data-driven + FAQPage schema for AEO) ---------- */
+(function(){
+  const I = REPORT.industries;
+  const faqs = [
+    {
+      q: "What's a good QR Code scan rate?",
+      a: `It depends on your industry, and the honest benchmark is the median rather than the average. The typical active QR Code earns ${I.mi.medianActive} scans in Manufacturing, ${I.fnb.medianActive} in F&B Manufacturing, ${I.cpg.medianActive} in CPG, and ${I.hotels.medianActive} in Hotels & Resorts. Averages run far higher because a small number of top performers pull them up, so measure yourself against the median for your sector.`
+    },
+    {
+      q: "How many scans does the average QR Code get, by industry?",
+      a: `The more useful benchmark is the median — the typical active code. Averages run far higher on paper but are distorted in both directions: inflated by a few very high-performing codes and deflated by test codes and codes never deployed in a campaign. Because the data isn't filtered, a raw average describes no real code, which is why this report leads with the median for every industry.`
+    },
+    {
+      q: "Do Dynamic QR Codes get scanned more than Static QR Codes?",
+      a: `Yes, decisively. Between ${I.fnb.dynamicPct}% and ${I.cpg.dynamicPct}% of live codes across all four industries are dynamic, and in every segment analyzed the Static QR Codes recorded essentially no scan activity — they exist mostly as legacy or test artifacts. Dynamic QR Codes also let you edit the destination and track scans, which is why they dominate real-world usage.`
+    },
+    {
+      q: "Does custom QR Code design increase scans?",
+      a: `Sometimes, but it isn't guaranteed. In CPG, a custom-designed code out-scans a plain black-and-white code by about 2.4× at the median (${I.cpg.design.designerMed} vs ${I.cpg.design.bwMed} scans). In Manufacturing the medians are identical, in Hotels & Resorts nearly so, and in F&B the pattern reverses. Placement and use case matter more than design alone.`
+    },
+    {
+      q: "What percentage of QR Codes drive most of the results?",
+      a: `A very small share. In every industry, between ${I.mi.concPctCodes}% and ${I.cpg.concPctCodes}% of QR Codes generate ${I.cpg.concPctScans}%–${I.mi.concPctScans}% of all scans. The strategic takeaway is to study what those top-performing codes do differently — the use case, placement, and destination — rather than trying to lift the average across every code.`
+    },
+    {
+      q: "What's the difference between median and average QR Code scans?",
+      a: `The median is the midpoint — half of all codes scan more, half scan less — so it describes a genuinely typical code. The average (mean) divides total scans by the number of codes, so a handful of codes with hundreds of thousands of scans drags it far above what most codes achieve, while test codes and codes never deployed in a campaign drag it back down. Because the data is unfiltered and performance is highly concentrated, this report leads with the median and shows the average only where the gap between the two is itself the insight.`
+    }
+  ];
+
+  const list = document.getElementById("faq-list");
+  faqs.forEach((f,i)=>{
+    const item = document.createElement("div");
+    item.className = "faq-item";
+    item.setAttribute("aria-expanded", "false");
+    item.innerHTML = `
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a-${i}" id="faq-q-${i}">
+        <span>${f.q}</span><span class="sign" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a" role="region" aria-labelledby="faq-q-${i}" id="faq-a-${i}"><div class="faq-a-inner">${f.a}</div></div>`;
+    list.appendChild(item);
+    const btn = item.querySelector(".faq-q");
+    btn.addEventListener("click", ()=>{
+      const open = item.getAttribute("aria-expanded") === "true";
+      item.setAttribute("aria-expanded", String(!open));
+      btn.setAttribute("aria-expanded", String(!open));
+    });
+  });
+
+  /* FAQPage JSON-LD — lets search/AI engines lift these as answers */
+  const schema = {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity": faqs.map(f=>({
+      "@type":"Question","name":f.q,
+      "acceptedAnswer":{"@type":"Answer","text":f.a}
+    }))
+  };
+  const s = document.createElement("script");
+  s.type = "application/ld+json";
+  s.textContent = JSON.stringify(schema);
+  document.head.appendChild(s);
+})();
+function countUp(el){
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || "";
+  const dur = 1200, t0 = performance.now();
+  const isFloat = String(el.dataset.count).includes(".");
+  function tick(t){
+    const p = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-p,3);
+    const v = target*e;
+    el.textContent = (isFloat ? v.toFixed(1) : Math.round(v).toLocaleString("en-US")) + suffix;
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ---------- reveal + lazy triggers ---------- */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    en.target.classList.add("in");
+    en.target.querySelectorAll(".bar-fill").forEach(b=>{ b.style.width = b.dataset.w + "%"; });
+    en.target.querySelectorAll("[data-count]").forEach(countUp);
+    if(en.target.classList.contains("qr-grid")) litGrid(en.target);
+    io.unobserve(en.target);
+  });
+},{threshold:.25});
+
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+document.querySelectorAll(".meta-strip").forEach(el=>io.observe(el));
+
+/* ---------- benchmark instrument ---------- */
+const SCALE_MAX = 5e6;
+const seg = document.getElementById("instr-seg");
+const scale = document.getElementById("instr-scale");
+const note = document.getElementById("instr-note");
+
+INDUSTRY_ORDER.forEach((k,i)=>{
+  const d = REPORT.industries[k];
+  const b = document.createElement("button");
+  b.textContent = d.shortName;
+  b.setAttribute("aria-pressed", i===0 ? "true" : "false");
+  b.addEventListener("click", ()=>{ 
+    seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    renderInstrument(k);
+  });
+  seg.appendChild(b);
+});
+
+function renderInstrument(key){
+  const d = REPORT.industries[key];
+  scale.innerHTML = "";
+  /* axis + ticks */
+  const axis = document.createElement("div"); axis.className = "scale-axis"; scale.appendChild(axis);
+  [1,10,100,1e3,1e4,1e5,1e6].forEach(v=>{
+    const t = document.createElement("div"); t.className = "scale-tick";
+    t.style.left = logPos(v,SCALE_MAX)+"%";
+    t.innerHTML = `<span>${fmtCompact(v)}</span>`;
+    scale.appendChild(t);
+  });
+  const markers = [
+    {label:"Typical code (median)", v:d.medianActive, cls:"is-red"},
+    {label:"Segment average", v:d.meanActive, cls:"is-hollow"},
+    {label:"Record code", v:d.maxCode, cls:""}
+  ];
+  markers.forEach(m=>{
+    const el = document.createElement("div");
+    el.className = "marker "+m.cls;
+    el.style.left = logPos(m.v,SCALE_MAX)+"%";
+    el.innerHTML = `<div class="flag">${m.label}</div><div class="val">${fmt(m.v)}</div><div class="stem"></div><div class="dot"></div>`;
+    scale.appendChild(el);
+  });
+  note.innerHTML = `<strong>${d.name}:</strong> the typical active code earns <strong>${fmt(d.medianActive)}</strong> scans. The average (${fmt(d.meanActive)}) sits far from it — dragged up by a handful of outlier codes and down by inactive ones — so it describes no real code. That gap is the story: performance is concentrated, and the median is the honest benchmark.`;
+}
+renderInstrument("cpg");
+
+/* ---------- industry tabs ---------- */
+const tabs = document.getElementById("industry-tabs");
+const panels = document.getElementById("industry-panels");
+
+INDUSTRY_ORDER.forEach((k,i)=>{
+  const d = REPORT.industries[k];
+  const tab = document.createElement("button");
+  tab.id = "tab-"+k; tab.setAttribute("role","tab");
+  tab.setAttribute("aria-selected", i===0 ? "true":"false");
+  tab.setAttribute("aria-controls","panel-"+k);
+  tab.textContent = d.shortName;
+  tab.addEventListener("click", ()=>selectTab(k));
+  tabs.appendChild(tab);
+
+  const p = document.createElement("div");
+  p.className = "tabpanel"; p.id = "panel-"+k;
+  p.setAttribute("role","tabpanel"); p.setAttribute("aria-labelledby","tab-"+k);
+  if(i!==0) p.hidden = true;
+  p.innerHTML = panelHTML(d);
+  panels.appendChild(p);
+});
+
+function panelHTML(d){
+  const bars = d.useCases.slice(0,5).map(u=>`
+    <div class="bar-row">
+      <span class="name" title="${u.name}">${u.name}</span>
+      <div class="bar-track"><div class="bar-fill ${u.avgActive === Math.max(...d.useCases.map(x=>x.avgActive)) ? "red":""}" data-w="${Math.max(3, u.scansPct)}"></div></div>
+      <span class="v">${u.scansPct}%</span>
+    </div>`).join("");
+  return `
+  <div class="industry-grid">
+    <div>
+      <div class="sig-stat">
+        <span class="num">${d.scansDisplay}</span>
+        <span class="cap">Total scans — ${d.name}</span>
+      </div>
+      <div class="stat-row">
+        <div><span class="num">${d.accounts}</span><span class="label">Brands</span></div>
+        <div><span class="num">${fmt(d.codes)}</span><span class="label">Live codes</span></div>
+        <div><span class="num" data-count="${d.medianActive}">0</span><span class="label">Median scans / active code</span></div>
+        <div><span class="num" style="color:var(--accent)">${d.concPctScans}%</span><span class="label">of all scans come from just ${d.concPctCodes}% of codes</span></div>
+      </div>
+      <div class="panel-ctas">
+        <a class="btn btn-solid" href="industry.html?i=${d.slug}">Read the full ${d.name} benchmark →</a>
+        <a class="btn btn-ghost" href="#get-reports">Download the PDF</a>
+      </div>
+    </div>
+    <div>
+      <p class="lede" style="font-size:16px;margin-bottom:24px">${d.summary}</p>
+      <ul class="insight-list">${d.tabInsights.map(t=>`<li>${t}</li>`).join("")}</ul>
+      <p class="eyebrow" style="margin:30px 0 14px">Where the scans go · % of total scans by use case</p>
+      <div class="bars">${bars}</div>
+    </div>
+  </div>`;
+}
+
+function selectTab(key){
+  INDUSTRY_ORDER.forEach(k=>{
+    document.getElementById("tab-"+k).setAttribute("aria-selected", k===key ? "true":"false");
+    document.getElementById("panel-"+k).hidden = k!==key;
+  });
+  /* trigger bar + count animations for newly shown panel */
+  const p = document.getElementById("panel-"+key);
+  p.querySelectorAll(".bar-fill").forEach(b=>{ b.style.width = b.dataset.w + "%"; });
+  p.querySelectorAll("[data-count]").forEach(countUp);
+}
+/* animate the initially visible panel via observer */
+io.observe(document.getElementById("panel-cpg"));
+
+/* ---------- comparison table ---------- */
+const tbody = document.querySelector("#compare-table tbody");
+INDUSTRY_ORDER.forEach(k=>{
+  const d = REPORT.industries[k];
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td><a href="industry.html?i=${d.slug}" style="text-decoration:none;font-weight:600">${d.name}</a></td>
+    <td class="n r">${d.accounts}</td>
+    <td class="n r">${fmt(d.codes)}</td>
+    <td class="n r">${d.scansDisplay}</td>
+    <td class="n r" style="color:var(--accent);font-weight:600">${d.medianActive}</td>
+    <td class="n r">${fmt(d.maxCode)}</td>`;
+  tbody.appendChild(tr);
+});
+
+/* ---------- findings ---------- */
+const fl = document.getElementById("findings-list");
+REPORT.universalFindings.forEach((f,i)=>{
+  const el = document.createElement("div");
+  el.className = "finding reveal";
+  el.innerHTML = `<div class="fnum">0${i+1}</div><div><h3>${f.title}</h3><p>${f.body}</p></div>`;
+  fl.appendChild(el);
+  io.observe(el);
+});
+
+/* ---------- lead form (front-end only; wire to backend) ---------- */
+document.getElementById("lead-form").addEventListener("submit", e=>{
+  e.preventDefault();
+  const form = e.target;
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  /* TODO: POST to marketing automation endpoint here */
+  form.style.display = "none";
+  document.getElementById("lead-success").classList.add("show");
+});
+</script>
+</body>
+</html>

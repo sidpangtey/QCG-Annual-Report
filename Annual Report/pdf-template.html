@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scanova Benchmark Report</title>
+<style>
+/* ---------- fonts (local, embedded at render time) ---------- */
+@font-face{font-family:'Inter';font-weight:400;src:url('node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:500;src:url('node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:600;src:url('node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:700;src:url('node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:800;src:url('node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2') format('woff2')}
+
+/* ---------- tokens (mirrors site) ---------- */
+:root{
+  --ink:#1f2430;
+  --ink-70:rgba(31,36,48,.72);
+  --ink-55:rgba(31,36,48,.55);
+  --ink-30:rgba(31,36,48,.3);
+  --ink-12:rgba(31,36,48,.12);
+  --ink-06:rgba(31,36,48,.06);
+  --accent:#c0392b;
+  --accent-dark:#a93226;
+  --accent-dim:rgba(192,57,43,.1);
+  --radius:10px;
+  --radius-sm:7px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{font-family:'Inter',sans-serif;color:var(--ink);font-size:10.5pt;line-height:1.55;background:#fff}
+@page{size:A4;margin:0}
+
+/* ---------- page frame ---------- */
+.page{
+  width:210mm;height:297mm;position:relative;overflow:hidden;
+  padding:16mm 16mm 20mm;page-break-after:always;background:#fff;
+}
+.page:last-child{page-break-after:auto}
+.pfoot{
+  position:absolute;left:16mm;right:16mm;bottom:9mm;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:7.5pt;font-weight:500;color:var(--ink-55);
+  border-top:1px solid var(--ink-12);padding-top:3mm;
+}
+.pfoot .mark{display:flex;align-items:center;gap:5px;font-weight:700;color:var(--ink)}
+.pfoot .mark i{width:9px;height:9px;position:relative;display:inline-block}
+.pfoot .mark i::before,.pfoot .mark i::after{content:'';position:absolute;background:var(--accent)}
+.pfoot .mark i::before{left:50%;top:0;width:1.5px;height:100%;transform:translateX(-50%)}
+.pfoot .mark i::after{top:50%;left:0;height:1.5px;width:100%;transform:translateY(-50%)}
+
+/* ---------- type ---------- */
+.eyebrow{font-size:8.5pt;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:7px}
+.eyebrow::before{content:'';width:16px;height:2px;background:var(--accent);border-radius:2px}
+h1{font-size:26pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;margin:5mm 0 4mm}
+h2{font-size:17pt;font-weight:800;line-height:1.15;letter-spacing:-.015em;margin:3.5mm 0 3.5mm}
+h3{font-size:11pt;font-weight:700;letter-spacing:-.01em;margin-bottom:2.5mm}
+.lede{font-size:10.5pt;color:var(--ink-70);max-width:150mm}
+.num{font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.small{font-size:8pt;color:var(--ink-55)}
+.note{font-size:8pt;color:var(--ink-55);margin-top:2.5mm;max-width:160mm}
+
+/* ---------- cover ---------- */
+.cover{
+  background:
+    radial-gradient(180mm 120mm at 8% -5%,rgba(192,57,43,.32),transparent 62%),
+    radial-gradient(170mm 130mm at 100% 108%,rgba(192,57,43,.2),transparent 60%),
+    var(--ink);
+  color:#fff;display:flex;flex-direction:column;padding:18mm;
+}
+.cover .brandline{display:flex;align-items:center;gap:8px;font-weight:800;font-size:12pt}
+.cover .brandline i{width:15px;height:15px;position:relative;display:inline-block}
+.cover .brandline i::before,.cover .brandline i::after{content:'';position:absolute;background:var(--accent);border-radius:1px}
+.cover .brandline i::before{left:50%;top:0;width:2.5px;height:100%;transform:translateX(-50%)}
+.cover .brandline i::after{top:50%;left:0;height:2.5px;width:100%;transform:translateY(-50%)}
+.cover .mid{margin:auto 0;padding:14mm 0}
+.cover .eyebrow{color:#e8695c}
+.cover h1{font-size:33pt;max-width:150mm;color:#fff}
+.cover .sub{font-size:12.5pt;color:rgba(255,255,255,.78);max-width:140mm;margin-top:4mm;line-height:1.5}
+.cover-meta{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.22);margin-top:auto}
+.cover-meta>div{padding:6mm 12mm 0 0;margin-right:12mm}
+.cover-meta .num{font-size:19pt;color:#fff;display:block}
+.cover-meta .label{font-size:8.5pt;font-weight:500;color:rgba(255,255,255,.65);margin-top:1mm;display:block}
+.cover .foot{display:flex;justify-content:space-between;font-size:8.5pt;color:rgba(255,255,255,.6);margin-top:10mm}
+
+/* ---------- back cover ---------- */
+.backcover{
+  background:
+    radial-gradient(170mm 120mm at 90% -5%,rgba(192,57,43,.3),transparent 60%),
+    radial-gradient(150mm 110mm at 5% 105%,rgba(192,57,43,.18),transparent 60%),
+    var(--ink);
+  color:#fff;display:flex;flex-direction:column;justify-content:center;padding:20mm;
+}
+.backcover h2{color:#fff;font-size:22pt;max-width:130mm}
+.backcover .sub{color:rgba(255,255,255,.75);font-size:11pt;max-width:130mm;margin-bottom:9mm}
+.cta-row{display:flex;gap:6mm;margin-bottom:12mm}
+.cta-a{background:var(--accent);color:#fff;font-weight:700;font-size:10.5pt;padding:4.2mm 7mm;border-radius:var(--radius-sm);text-decoration:none}
+.cta-b{background:#fff;color:var(--ink);font-weight:700;font-size:10.5pt;padding:4.2mm 7mm;border-radius:var(--radius-sm);text-decoration:none}
+.link-list{font-size:9pt;color:rgba(255,255,255,.65);line-height:2}
+.link-list strong{color:#fff;font-weight:600}
+.backcover .legal{margin-top:14mm;font-size:7.5pt;color:rgba(255,255,255,.45);max-width:150mm}
+
+/* ---------- stat blocks ---------- */
+.sig{margin:5mm 0 2mm}
+.sig .num{font-size:44pt;line-height:.95;display:block}
+.sig .cap{font-size:9.5pt;font-weight:500;color:var(--ink-70);margin-top:2mm;display:block}
+.statgrid{display:flex;border-top:1px solid var(--ink-12);margin-top:5mm}
+.statgrid>div{padding:4mm 9mm 0 0;margin-right:9mm}
+.statgrid .num{font-size:15pt;display:block}
+.statgrid .label{font-size:8.5pt;font-weight:500;color:var(--ink-70);margin-top:.5mm;display:block;max-width:34mm}
+
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:5mm}
+.cards.two{grid-template-columns:repeat(2,1fr)}
+.card{border:1px solid var(--ink-12);border-radius:var(--radius);padding:5.5mm;background:#fff}
+.card .k{font-size:7.5pt;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.card h3{margin:2mm 0 1.5mm;font-size:10.5pt}
+.card p{font-size:8.6pt;color:var(--ink-70);line-height:1.5}
+.card .big{font-size:19pt;display:block;margin:1.5mm 0 .5mm}
+
+/* ---------- instrument (static log scale) ---------- */
+.instrument{border:1px solid var(--ink-12);border-radius:var(--radius);padding:7mm 8mm 5mm;margin-top:5mm}
+.instrument-title{font-size:8pt;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-55)}
+.scale{position:relative;height:30mm;margin-top:9mm}
+.scale-axis{position:absolute;left:0;right:0;top:19mm;height:1.5px;background:var(--ink-30);border-radius:2px}
+.scale-tick{position:absolute;top:19mm;width:1px;height:2.2mm;background:var(--ink-30)}
+.scale-tick span{position:absolute;top:3mm;left:50%;transform:translateX(-50%);font-size:7.5pt;font-weight:500;color:var(--ink-55);white-space:nowrap}
+.marker{position:absolute;top:0;transform:translateX(-50%);text-align:center}
+.marker .flag{font-size:7pt;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-55);white-space:nowrap}
+.marker .val{font-weight:800;font-size:10.5pt;white-space:nowrap}
+.marker .stem{width:1.5px;height:6.5mm;background:var(--ink);margin:1.2mm auto 0}
+.marker .dot{width:2.6mm;height:2.6mm;border-radius:50%;background:var(--ink);margin:0 auto;transform:translateY(1.1mm)}
+.marker.is-red .stem,.marker.is-red .dot{background:var(--accent)}
+.marker.is-red .val{color:var(--accent)}
+.marker.is-hollow .dot{background:#fff;border:1.5px solid var(--ink)}
+
+/* ---------- bars ---------- */
+.bars{display:grid;gap:3.2mm;margin-top:4mm}
+.bar-row{display:grid;grid-template-columns:44mm 1fr 13mm;gap:4mm;align-items:center;font-size:9pt}
+.bar-row .name{color:var(--ink-70);font-weight:500;line-height:1.25}
+.bar-track{height:4.2mm;background:var(--ink-06);border-radius:99px;overflow:hidden}
+.bar-fill{height:100%;background:var(--ink);border-radius:99px}
+.bar-fill.red{background:var(--accent)}
+.bar-row .v{font-size:8.5pt;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- split viz ---------- */
+.split-viz{border:1px solid var(--ink-12);border-radius:var(--radius);padding:6.5mm 7mm}
+.split-block{margin-bottom:6mm}
+.split-block:last-of-type{margin-bottom:0}
+.split-label{display:flex;justify-content:space-between;align-items:baseline;font-size:9pt;font-weight:600;margin-bottom:2.2mm}
+.split-label .hint{font-size:8pt;font-weight:500;color:var(--ink-55)}
+.split-bar{display:flex;height:9.5mm;border-radius:var(--radius-sm);overflow:hidden;background:var(--ink-06)}
+.split-bar .seg-red{background:var(--accent);min-width:1.6mm}
+.split-bar .seg-rest{background:var(--ink-12);flex:1}
+.split-legend{display:flex;gap:7mm;margin-top:4.5mm;font-size:8pt;font-weight:500;color:var(--ink-70)}
+.split-legend span{display:inline-flex;align-items:center;gap:2.2mm}
+.split-legend i{width:3mm;height:3mm;border-radius:1mm;display:inline-block}
+.split-legend .sw-red{background:var(--accent)}
+.split-legend .sw-rest{background:var(--ink-12)}
+
+/* ---------- tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:9pt;margin-top:4mm}
+.tbl th{font-size:7.8pt;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-55);text-align:left;font-weight:700;padding:2.6mm 3mm;border-bottom:1.5px solid var(--ink)}
+.tbl td{padding:2.8mm 3mm;border-bottom:1px solid var(--ink-12);vertical-align:top}
+.tbl td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
+.tbl tr.hl td{background:var(--accent-dim)}
+.tbl .r{text-align:right}
+
+/* ---------- callout / opportunity ---------- */
+.callout{border-left:2.5px solid var(--accent);padding:1.5mm 0 1.5mm 5mm;margin-top:5mm;font-size:10pt;color:var(--ink-70)}
+.callout strong{color:var(--ink)}
+.opp{display:grid;grid-template-columns:34mm 1fr;gap:6mm;padding:4.6mm 0;border-top:1px solid var(--ink-12);align-items:start}
+.opp:last-of-type{border-bottom:1px solid var(--ink-12)}
+.opp .metric .num{font-size:16pt;color:var(--accent);display:block;line-height:1.05}
+.opp .metric .small{display:block;margin-top:.6mm;line-height:1.3}
+.opp h3{font-size:10.5pt;margin-bottom:1mm}
+.opp .pen{font-size:8pt;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4mm}
+.opp p{font-size:9pt;color:var(--ink-70)}
+
+/* ---------- contents ---------- */
+.toc{margin-top:6mm}
+.toc-row{display:flex;align-items:baseline;gap:4mm;padding:3.4mm 0;border-bottom:1px solid var(--ink-12);font-size:10.5pt}
+.toc-row .cnum{font-weight:800;color:var(--ink-30);width:10mm;font-size:11pt}
+.toc-row .t{font-weight:600}
+.toc-row .d{margin-left:auto;color:var(--ink-55);font-size:9pt;text-align:right}
+
+/* two-col helper */
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:8mm;align-items:start}
+.mt{margin-top:6mm}
+</style>
+</head>
+<body id="doc"></body>
+<script src="report-data.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const key = INDUSTRY_ORDER.includes(params.get("i")) ? params.get("i") : "cpg";
+const D = REPORT.industries[key];
+const M = REPORT.meta;
+document.title = `Scanova QR Benchmarks 2026 — ${D.name}`;
+
+const SCALE_MAX = 5e6;
+const clampPos = v => Math.min(93, Math.max(6, logPos(v, SCALE_MAX)));
+
+function foot(n, total){
+  return `<div class="pfoot">
+    <span class="mark"><i></i>QR Performance Benchmarks 2026 · ${D.name}</span>
+    <span>scanova.io &nbsp;·&nbsp; ${String(n).padStart(2,"0")} / ${String(total).padStart(2,"0")}</span>
+  </div>`;
+}
+
+function scaleHTML(){
+  const ticks = [1,10,100,1e3,1e4,1e5,1e6].map(v=>
+    `<div class="scale-tick" style="left:${logPos(v,SCALE_MAX)}%"><span>${fmtCompact(v)}</span></div>`).join("");
+  const markers = [
+    {label:"Typical code (median)", v:D.medianActive, cls:"is-red"},
+    {label:"Segment average", v:D.meanActive, cls:"is-hollow"},
+    {label:"Record code", v:D.maxCode, cls:""}
+  ].map(m=>`<div class="marker ${m.cls}" style="left:${clampPos(m.v)}%">
+      <div class="flag">${m.label}</div><div class="val">${fmt(m.v)}</div>
+      <div class="stem"></div><div class="dot"></div></div>`).join("");
+  return `<div class="instrument">
+    <div class="instrument-title">Scans per QR code · active codes · all-time · log scale</div>
+    <div class="scale"><div class="scale-axis"></div>${ticks}${markers}</div>
+  </div>`;
+}
+
+function barsHTML(rows, labelKey, valKey, opts={}){
+  const max = Math.max(...rows.map(r=>r[valKey]));
+  return `<div class="bars">` + rows.map(r=>{
+    const red = opts.redMax && r[valKey]===max;
+    const w = Math.max(2.5, r[valKey]/max*100);
+    const val = opts.pct ? r[valKey]+"%" : fmt(r[valKey]);
+    return `<div class="bar-row"><span class="name">${r[labelKey]}</span>
+      <div class="bar-track"><div class="bar-fill ${red?"red":""}" style="width:${w}%"></div></div>
+      <span class="v">${val}</span></div>`;
+  }).join("") + `</div>`;
+}
+
+const bestUC = Math.max(...D.useCases.map(u=>u.avgActive));
+
+const pages = [];
+
+/* ---------- 01 · COVER ---------- */
+pages.push(`
+<div class="page cover">
+  <div class="brandline"><i></i>Scanova</div>
+  <div class="mid">
+    <p class="eyebrow">Annual QR Code Performance Report · 2026</p>
+    <h1>${D.name}<br>QR Benchmarks</h1>
+    <p class="sub">${D.heroLine} Benchmarks from first-party scan data — what the typical code earns, what the leaders do differently, and where the untapped opportunities are.</p>
+  </div>
+  <div class="cover-meta">
+    <div><span class="num">${D.accounts}</span><span class="label">Brands analyzed</span></div>
+    <div><span class="num">${fmt(D.codes)}</span><span class="label">Live QR codes</span></div>
+    <div><span class="num">${D.scansDisplay}</span><span class="label">Total scans</span></div>
+    <div><span class="num">${fmt(D.medianActive)}</span><span class="label">Median scans / active code</span></div>
+  </div>
+  <div class="foot"><span>First-party Scanova platform data</span><span>scanova.io</span></div>
+</div>`);
+
+/* ---------- 02 · ABOUT + CONTENTS ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">About this report</p>
+  <h2>Not a survey. Not a sample.<br>The platform itself.</h2>
+  <p class="lede">${D.summary}</p>
+  <p class="lede mt" style="font-size:10pt">Most QR industry reports ask marketers what they think happens. This one measures what actually happened: every number comes from scan events recorded on the Scanova platform, tracked across full code lifetimes. Medians lead every benchmark, and outlier accounts are disclosed — so the numbers you compare yourself against are honest ones.</p>
+
+  <div class="cards two mt">
+    <div class="card"><span class="k">First-party</span><h3>Real scan events</h3><p>Recorded platform scans — not self-reported estimates or third-party panels.</p></div>
+    <div class="card"><span class="k">All-time</span><h3>Full code lifetimes</h3><p>Codes tracked from creation to today, including codes live for a decade.</p></div>
+    <div class="card"><span class="k">Reconciled</span><h3>Every total adds up</h3><p>Scan totals reconcile to the master ledger in every table in this report.</p></div>
+    <div class="card"><span class="k">Medians first</span><h3>Honest benchmarks</h3><p>Averages are shown but never lead — concentration would distort them.</p></div>
+  </div>
+
+  <h3 class="mt" style="margin-top:8mm">Contents</h3>
+  <div class="toc">
+    <div class="toc-row"><span class="cnum">01</span><span class="t">Scan benchmarks</span><span class="d">The number to measure yourself against</span></div>
+    <div class="toc-row"><span class="cnum">02</span><span class="t">The concentration curve</span><span class="d">A few codes carry the industry</span></div>
+    <div class="toc-row"><span class="cnum">03</span><span class="t">Who wins</span><span class="d">Performance by plan tier and tenure</span></div>
+    <div class="toc-row"><span class="cnum">04</span><span class="t">Inside the portfolio</span><span class="d">Code types, design, and longevity</span></div>
+    <div class="toc-row"><span class="cnum">05</span><span class="t">Use-case intelligence</span><span class="d">What's deployed vs what performs</span></div>
+    <div class="toc-row"><span class="cnum">06</span><span class="t">The opportunity map</span><span class="d">Proven use cases your peers haven't touched</span></div>
+  </div>
+  ${foot(2, 10)}
+</div>`);
+
+/* ---------- 03 · CH01 BENCHMARKS ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">Chapter 01 · Scan benchmarks</p>
+  <h2>The number to measure yourself against</h2>
+  <p class="lede">The typical active ${D.shortName} code earns <strong>${fmt(D.medianActive)} scans</strong>. The segment average is ${fmt(D.meanActive)} — pulled up by outliers, which is why the median is the honest benchmark.</p>
+
+  <div class="sig"><span class="num">${fmt(D.medianActive)}</span><span class="cap">Median scans per active code — ${D.name}, all-time</span></div>
+
+  ${scaleHTML()}
+  <p class="note">The record — <strong>${fmt(D.maxCode)} scans</strong> — belongs to ${D.maxCodeDesc}. ${D.zeroPct}% of live codes have never been scanned.</p>
+
+  <h3 class="mt" style="margin-top:8mm">Account-level benchmarks</h3>
+  <div class="cards" style="grid-template-columns:repeat(4,1fr)">
+    <div class="card"><span class="k">Median scans / account</span><span class="num big">${D.accountBench.medScans}</span></div>
+    <div class="card"><span class="k">Average scans / account</span><span class="num big">${D.accountBench.avgScans}</span></div>
+    <div class="card"><span class="k">Median codes / account</span><span class="num big">${D.accountBench.medCodes}</span></div>
+    <div class="card"><span class="k">Average codes / account</span><span class="num big">${D.accountBench.avgCodes}</span></div>
+  </div>
+  <p class="note">${D.accountNote}</p>
+  ${foot(3, 10)}
+</div>`);
+
+/* ---------- 04 · CH02 CONCENTRATION ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">Chapter 02 · The concentration curve</p>
+  <h2>A few codes carry the industry</h2>
+  <p class="lede">Scan volume in ${D.shortName} is not evenly earned. Codes that cleared 10,000+ scans are a sliver of the portfolio — yet they generate nearly all the engagement.</p>
+
+  <div class="sig"><span class="num" style="color:var(--accent)">${D.concPctCodes}%</span><span class="cap">of codes generate ${D.concPctScans}% of all ${D.shortName} scans</span></div>
+
+  <div class="split-viz mt">
+    <div class="split-block">
+      <div class="split-label"><span>Share of QR codes</span><span class="hint">top performers = ${D.concPctCodes}% of codes</span></div>
+      <div class="split-bar"><div class="seg-red" style="width:${D.concPctCodes}%"></div><div class="seg-rest"></div></div>
+    </div>
+    <div class="split-block">
+      <div class="split-label"><span>Share of scans</span><span class="hint">top performers = ${D.concPctScans}% of scans</span></div>
+      <div class="split-bar"><div class="seg-red" style="width:${D.concPctScans}%"></div><div class="seg-rest"></div></div>
+    </div>
+    <div class="split-legend">
+      <span><i class="sw-red"></i>Top-performing codes (10,000+ scans each)</span>
+      <span><i class="sw-rest"></i>All other codes</span>
+    </div>
+  </div>
+
+  <h3 class="mt" style="margin-top:7mm">Performance tiers — where every code lands</h3>
+  <table class="tbl">
+    <thead><tr><th>Scan tier</th><th class="r">% of codes</th><th class="r">% of scans</th></tr></thead>
+    <tbody>${D.tiers.map(t=>`<tr${t.hl?' class="hl"':''}><td>${t.tier}</td><td class="n r">${t.codesPct}%</td><td class="n r">${t.scansPct}%</td></tr>`).join("")}</tbody>
+  </table>
+  <div class="callout"><strong>The strategic question</strong> isn't how to raise the average — it's how to build more codes that behave like the top performers. Chapters 05 and 06 show what those codes have in common.</div>
+  ${foot(4, 10)}
+</div>`);
+
+/* ---------- 05 · CH03 WHO WINS ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">Chapter 03 · Who wins</p>
+  <h2>Performance by plan and by tenure</h2>
+  <p class="lede">Mean scans per active code, giving each account equal weight.</p>
+
+  <div class="cols2 mt">
+    <div>
+      <h3>By plan tier</h3>
+      ${barsHTML(D.planTiers, "plan", "meanPerCode")}
+      <p class="note">${D.planNote}</p>
+    </div>
+    <div>
+      <h3>By customer tenure</h3>
+      ${barsHTML(D.tenure, "band", "meanPerCode", {redMax:true})}
+      <p class="note">Mean of per-account ratios (total scans ÷ active codes).</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:9mm"><strong>The tenure story:</strong> ${D.tenureInsight}</div>
+
+  <h3 class="mt" style="margin-top:8mm">Dynamic vs static</h3>
+  <div class="cards two">
+    <div class="card"><span class="k">Dynamic share</span><span class="num big">${D.dynamicPct}%</span><p>of live codes are dynamic — editable destinations with full scan tracking.</p></div>
+    <div class="card"><span class="k">Static share</span><span class="num big">${(100-D.dynamicPct).toFixed(1)}%</span><p>Static codes recorded <strong>zero</strong> scan activity in this segment — legacy and test artifacts only.</p></div>
+  </div>
+  ${foot(5, 10)}
+</div>`);
+
+/* ---------- 06 · CH04 PORTFOLIO ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">Chapter 04 · What's being scanned</p>
+  <h2>Inside the portfolio</h2>
+
+  <h3 class="mt">Code types — % of total scans by category</h3>
+  ${barsHTML(D.categories, "name", "scansPct", {pct:true})}
+  <p class="note">${D.categoryInsight}</p>
+
+  <div class="cards two" style="margin-top:8mm">
+    <div class="card">
+      <span class="k">Custom design finding</span>
+      <div style="display:flex;gap:10mm;margin:2.5mm 0 2mm">
+        <div><span class="num" style="font-size:17pt">${D.design.designerMed}</span><div class="small">median · designer</div></div>
+        <div><span class="num" style="font-size:17pt">${D.design.bwMed}</span><div class="small">median · black &amp; white</div></div>
+      </div>
+      <p>${D.design.story}</p>
+    </div>
+    <div class="card">
+      <span class="k">Longevity</span>
+      <div style="display:flex;gap:10mm;margin:2.5mm 0 2mm">
+        <div><span class="num" style="font-size:17pt">${D.longevity.meanAge}</span><div class="small">mean code age</div></div>
+        <div><span class="num" style="font-size:17pt">${D.longevity.oldest}</span><div class="small">oldest live code</div></div>
+      </div>
+      <p>${D.longevity.story}</p>
+    </div>
+  </div>
+  ${foot(6, 10)}
+</div>`);
+
+/* ---------- 07 · CH05 USE CASES ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">Chapter 05 · Use-case intelligence</p>
+  <h2>What's deployed — and what actually performs</h2>
+  <p class="lede">Deployment share tells you what the industry does. Scans per active code tells you what works. They are rarely the same thing.</p>
+
+  <table class="tbl mt">
+    <thead><tr><th>Use case</th><th class="r">% of codes</th><th class="r">% of scans</th><th class="r">Avg scans / active code</th><th class="r">Active rate</th></tr></thead>
+    <tbody>${D.useCases.map(u=>`<tr${u.avgActive===bestUC?' class="hl"':''}>
+      <td>${u.name}</td><td class="n r">${u.codesPct}%</td><td class="n r">${u.scansPct}%</td>
+      <td class="n r"${u.avgActive===bestUC?' style="color:var(--accent);font-weight:700"':''}>${fmt(u.avgActive)}</td>
+      <td class="n r">${u.activePct}%</td></tr>`).join("")}</tbody>
+  </table>
+  <p class="note">Use cases classified from code category, name, and destination URL. Highlighted row = highest scans per active code. Active rate = share of deployed codes with at least one scan.</p>
+
+  <div class="callout" style="margin-top:8mm"><strong>Read this table twice.</strong> Once down the "% of codes" column to see where the industry spends its deployment effort — and once down "Avg scans / active code" to see where the returns actually are. The gap between the two columns is Chapter 06.</div>
+  ${foot(7, 10)}
+</div>`);
+
+/* ---------- 08 · CH06 OPPORTUNITIES ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">Chapter 06 · The opportunity map</p>
+  <h2>High-performing use cases your peers haven't touched</h2>
+  <p class="lede" style="margin-bottom:5mm">Every use case below is already proven inside this industry — by a small number of accounts. That's not a prediction; it's a head start.</p>
+
+  ${D.opportunities.map(o=>`
+  <div class="opp">
+    <div class="metric"><span class="num">${fmt(o.avg)}</span><span class="small">avg scans per active code</span></div>
+    <div>
+      <div class="pen">${o.penetration}</div>
+      <h3>${o.name}</h3>
+      <p>${o.body}</p>
+    </div>
+  </div>`).join("")}
+  ${foot(8, 10)}
+</div>`);
+
+/* ---------- 09 · KEY NUMBERS ---------- */
+pages.push(`
+<div class="page">
+  <p class="eyebrow">Summary</p>
+  <h2>The numbers to remember</h2>
+
+  <div class="cards" style="grid-template-columns:repeat(3,1fr);margin-top:6mm">
+    <div class="card"><span class="k">Typical code</span><span class="num big">${fmt(D.medianActive)}</span><p>median scans per active code</p></div>
+    <div class="card"><span class="k">Segment average</span><span class="num big">${fmt(D.meanActive)}</span><p>mean scans per active code</p></div>
+    <div class="card"><span class="k">The record</span><span class="num big">${fmtCompact(D.maxCode)}</span><p>scans on a single code</p></div>
+    <div class="card"><span class="k">Concentration</span><span class="num big" style="color:var(--accent)">${D.concPctCodes}%</span><p>of codes generate ${D.concPctScans}% of scans</p></div>
+    <div class="card"><span class="k">Never scanned</span><span class="num big">${D.zeroPct}%</span><p>of live codes have zero scans</p></div>
+    <div class="card"><span class="k">Dynamic share</span><span class="num big">${D.dynamicPct}%</span><p>of live codes are dynamic</p></div>
+  </div>
+
+  <h3 style="margin-top:9mm">What the leaders do differently</h3>
+  <div style="margin-top:3mm">
+    ${D.tabInsights.map((t,i)=>`
+    <div class="toc-row" style="align-items:flex-start">
+      <span class="cnum" style="font-size:10pt">0${i+1}</span>
+      <span style="font-size:9.8pt;color:var(--ink-70);line-height:1.5">${t}</span>
+    </div>`).join("")}
+  </div>
+
+  <p class="note" style="margin-top:8mm">Methodology: ${D.accounts} ${D.name} accounts on the Scanova platform; ${fmt(D.codes)} live QR codes; ${fmt(D.scans)} all-time scans as of ${D.dataAsOf}. Median and mean computed on active codes (≥1 scan). Use cases classified from code category, name, and destination URL. Customer identities anonymized.</p>
+  ${foot(9, 10)}
+</div>`);
+
+/* ---------- 10 · BACK COVER ---------- */
+pages.push(`
+<div class="page backcover">
+  <h2>Ready to build codes that beat the benchmark?</h2>
+  <p class="sub">Scanova powers the QR programs behind this data — dynamic codes, custom design, bulk generation, and the scan analytics these benchmarks are built on.</p>
+  <div class="cta-row">
+    <a class="cta-a" href="https://app.scanova.io/auth/register">Start Free Trial → app.scanova.io</a>
+    <a class="cta-b" href="https://trycon.dayschedule.com/qr-code-generator-demo">Book a Demo</a>
+  </div>
+  <div class="link-list">
+    <strong>Start a free trial</strong> — app.scanova.io/auth/register<br>
+    <strong>Book a demo</strong> — trycon.dayschedule.com/qr-code-generator-demo<br>
+    <strong>All industry benchmarks</strong> — scanova.io
+  </div>
+  <p class="legal">© 2026 Scanova · Annual QR Code Performance Report. First-party Scanova platform data. Customer identities anonymized. This report may be shared in unmodified form with attribution to Scanova.</p>
+</div>`);
+
+document.getElementById("doc").innerHTML = pages.join("");
+</script>
+</html>

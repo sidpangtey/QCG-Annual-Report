@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industry QR Benchmarks | Scanova</title>
+<meta name="description" content="QR Code performance benchmarks from first-party Scanova scan data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="logo-icon-red.svg" alt="Scanova" width="26" height="26"><span>Scanova QR Benchmarks</span></a>
+    <div class="nav-links chapter-nav">
+      <a href="#benchmarks">Benchmarks</a>
+      <a href="#concentration">Concentration</a>
+      <a href="#who-wins">Who wins</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#use-cases">Use cases</a>
+      <a href="#opportunities">Opportunities</a>
+    </div>
+    <div class="nav-ctas">
+      <a class="nav-cta-ghost" href="https://scanova.io/" target="_blank" rel="noopener">Explore Scanova</a>
+      <a class="nav-cta" href="https://app.scanova.io/auth/register" target="_blank" rel="noopener">Start Free Trial</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="page-hero hero-dark" id="page-hero">
+  <div class="wrap">
+    <a class="crumb" href="index.html">← All industries · QR Performance Benchmarks 2026</a>
+    <div class="switcher" id="switcher" style="margin-top:18px"></div>
+    <div class="hero-grid" style="margin-top:30px">
+      <div>
+        <p class="eyebrow" id="h-eyebrow"></p>
+        <h1 style="margin-top:14px;max-width:20ch" id="h-title"></h1>
+        <p class="lede" style="margin-top:20px" id="h-summary"></p>
+      </div>
+      <div class="photo">
+        <img id="h-photo" alt="" loading="eager" decoding="async">
+      </div>
+    </div>
+    <div class="meta-strip" id="h-meta"></div>
+  </div>
+</header>
+
+<!-- ============ 01 BENCHMARKS ============ -->
+<section class="tight band" id="benchmarks">
+  <div class="wrap">
+    <p class="eyebrow">Chapter 01 · Scan benchmarks</p>
+    <h2 style="max-width:22ch">The number to measure yourself against</h2>
+    <p class="lede" id="b-lede"></p>
+
+    <div class="instrument reveal">
+      <div class="instrument-head">
+        <span class="instrument-title">Scans per QR Code · active codes · all-time</span>
+      </div>
+      <div class="scale" id="b-scale"></div>
+      <p class="instrument-note" id="b-note"></p>
+      <p class="foot-note" style="margin-top:14px">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them.</p>
+    </div>
+
+    <div class="two-col" style="margin-top:56px">
+      <div class="reveal">
+        <h3>Performance tiers — where every code lands</h3>
+        <div class="tbl-scroll">
+          <table class="tbl" id="tier-table">
+            <thead><tr><th>Scan tier</th><th class="r">% of codes</th><th class="r">% of scans</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="foot-note" id="tier-note"></p>
+      </div>
+      <div class="reveal">
+        <h3>Account-level benchmarks</h3>
+        <div class="cards" style="grid-template-columns:1fr 1fr;margin-top:20px">
+          <div class="card"><span class="k">Median scans / account</span><span class="num big" id="ab-medscans"></span></div>
+          <div class="card"><span class="k">Median codes / account</span><span class="num big" id="ab-medcodes"></span></div>
+        </div>
+        <p class="foot-note" id="ab-note"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 CONCENTRATION ============ -->
+<section id="concentration">
+  <div class="wrap conc">
+    <div class="reveal">
+      <p class="eyebrow">Chapter 02 · The concentration curve</p>
+      <h2 id="c-title"></h2>
+      <p class="lede" id="c-body"></p>
+      <div class="conc-stat">
+        <span class="num" id="c-codes"></span>
+        <div class="conc-eq" id="c-eq"></div>
+      </div>
+    </div>
+    <div>
+      <div class="split-viz reveal" id="split-viz">
+        <div class="split-block">
+          <div class="split-label"><span>Share of QR Codes</span><span class="hint" id="sv-codes-hint"></span></div>
+          <div class="split-bar"><div class="seg-red" id="sv-codes-bar"></div><div class="seg-rest"></div></div>
+        </div>
+        <div class="split-block">
+          <div class="split-label"><span>Share of scans</span><span class="hint" id="sv-scans-hint"></span></div>
+          <div class="split-bar"><div class="seg-red" id="sv-scans-bar"></div><div class="seg-rest"></div></div>
+        </div>
+        <div class="split-legend">
+          <span><i class="sw-red"></i>Top-performing codes (10,000+ scans each)</span>
+          <span><i class="sw-rest"></i>All other codes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 WHO WINS ============ -->
+<section class="tight band" id="who-wins">
+  <div class="wrap">
+    <p class="eyebrow">Chapter 03 · Who wins</p>
+    <h2 style="max-width:22ch" id="w-title">Performance by plan and by tenure</h2>
+    <div class="two-col" style="margin-top:36px">
+      <div class="reveal">
+        <h3>Mean scans per active code, by plan tier</h3>
+        <div class="bars" style="margin-top:20px" id="plan-bars"></div>
+        <p class="foot-note" id="plan-note"></p>
+      </div>
+      <div class="reveal">
+        <h3>Mean scans per active code, by customer tenure</h3>
+        <div class="bars" style="margin-top:20px" id="tenure-bars"></div>
+        <p class="foot-note" id="tenure-note"></p>
+      </div>
+    </div>
+    <div class="callout reveal" id="tenure-callout"></div>
+  </div>
+</section>
+
+<!-- ============ 04 PORTFOLIO ============ -->
+<section id="portfolio">
+  <div class="wrap">
+    <p class="eyebrow">Chapter 04 · What's being scanned</p>
+    <h2 style="max-width:22ch">Inside the portfolio</h2>
+
+    <div class="reveal portfolio-bars" style="margin-top:36px">
+      <h3>Code types — % of total scans by category</h3>
+      <div class="bars" style="margin-top:20px" id="cat-bars"></div>
+      <p class="foot-note" id="cat-note"></p>
+    </div>
+
+    <div class="cards portfolio-cards reveal">
+      <div class="card">
+        <span class="k">Dynamic vs Static QR Codes</span>
+        <span class="num big" id="dyn-pct"></span>
+        <p>of live codes are Dynamic QR Codes. Static QR Codes recorded <strong>zero</strong> scan activity in this segment.</p>
+      </div>
+      <div class="card">
+        <span class="k">Custom design finding</span>
+        <div style="display:flex;gap:32px;margin:10px 0 12px">
+          <div><span class="num" style="font-size:30px" id="des-med"></span><div class="small">median · designer</div></div>
+          <div><span class="num" style="font-size:30px" id="bw-med"></span><div class="small">median · black &amp; white</div></div>
+        </div>
+        <p id="des-story"></p>
+      </div>
+      <div class="card">
+        <span class="k">Longevity</span>
+        <div style="display:flex;gap:32px;margin:10px 0 12px;flex-wrap:wrap">
+          <div><span class="num" style="font-size:30px" id="age-mean"></span><div class="small">mean code age</div></div>
+          <div><span class="num" style="font-size:30px" id="age-oldest"></span><div class="small">oldest live code</div></div>
+        </div>
+        <p id="age-story"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 USE CASES ============ -->
+<section class="tight band" id="use-cases">
+  <div class="wrap">
+    <p class="eyebrow">Chapter 05 · Use-case intelligence</p>
+    <h2 style="max-width:24ch">What's deployed — and what actually performs</h2>
+    <p class="lede">Deployment share tells you what the industry does. Scans per active code tells you what works. They are rarely the same thing.</p>
+    <div class="tbl-scroll reveal">
+      <table class="tbl" id="uc-table">
+        <thead>
+          <tr>
+            <th>Use case</th>
+            <th class="r">% of codes</th>
+            <th class="r">% of scans</th>
+            <th class="r">Avg scans / active code</th>
+            <th class="r">Active rate</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="foot-note">Use cases classified from code category, name, and destination URL. Highlighted row = highest scans per active code. Active rate = share of deployed codes with at least one scan.</p>
+  </div>
+</section>
+
+<!-- ============ 06 OPPORTUNITIES ============ -->
+<section id="opportunities">
+  <div class="wrap">
+    <p class="eyebrow">Chapter 06 · The opportunity map</p>
+    <h2 style="max-width:24ch">High-performing use cases your peers haven't touched</h2>
+    <p class="lede">Every use case below is already proven inside this industry — by a small number of accounts. That's not a prediction; it's a head start.</p>
+    <div class="cards" id="opp-cards"></div>
+  </div>
+</section>
+
+<!-- ============ GET THE REPORT ============ -->
+<section class="band-ink" id="get-report">
+  <div class="wrap lead">
+    <div>
+      <p class="eyebrow">The full report</p>
+      <h2 style="max-width:18ch" id="g-title"></h2>
+      <p class="lede" id="g-body"></p>
+    </div>
+    <div>
+      <form class="lead-form" id="lead-form" novalidate>
+        <div>
+          <label for="lf-name">Full name</label>
+          <input id="lf-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div>
+          <label for="lf-email">Work email</label>
+          <input id="lf-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div>
+          <label for="lf-company">Company</label>
+          <input id="lf-company" name="company" type="text" autocomplete="organization" required>
+        </div>
+        <input type="hidden" name="industry" id="lf-industry">
+        <button type="submit" id="lf-btn">Send me the report</button>
+        <p class="fine">We'll email the PDF and, occasionally, benchmark updates. No spam — unsubscribe anytime.</p>
+      </form>
+      <div class="lead-success" id="lead-success" style="background:var(--paper)">
+        <h3 style="color:var(--ink)">Check your inbox</h3>
+        <p style="color:var(--ink-70);margin-top:8px">Your report is on its way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT INDUSTRY ============ -->
+<section class="tight">
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+    <a class="crumb" href="index.html">← Back to all industries</a>
+    <a class="btn btn-ghost" id="next-link" href="#"></a>
+  </div>
+</section>
+
+<!-- ============ SCANOVA CTA BAND ============ -->
+<section class="cta-band">
+  <div class="wrap cta-band-grid">
+    <div class="cta-cell">
+      <div class="cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h3v3h-3zM17 17h3v3h-3z"/></svg>
+      </div>
+      <div>
+        <h3>Ready to build QR Codes that beat your industry's benchmark?</h3>
+        <a class="cta-btn-solid" href="https://app.scanova.io/auth/register" target="_blank" rel="noopener">Start Free Trial →</a>
+      </div>
+    </div>
+    <div class="cta-band-divider" aria-hidden="true"></div>
+    <div class="cta-cell">
+      <div class="cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M4 12v4a2 2 0 0 0 2 2h1v-6H5"/><path d="M20 12v4a2 2 0 0 1-2 2h-1v-6h2"/><path d="M17 18v1a2 2 0 0 1-2 2h-2"/></svg>
+      </div>
+      <div>
+        <h3>Not sure if Scanova fits your use case?</h3>
+        <a class="cta-btn-white" href="https://trycon.dayschedule.com/qr-code-generator-demo" target="_blank" rel="noopener">Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Scanova · Annual QR Code Performance Report</span>
+    <span class="mono" id="footer-note"></span>
+  </div>
+</footer>
+
+<script src="report-data.js"></script>
+<script>
+/* ---------- resolve industry ---------- */
+const params = new URLSearchParams(location.search);
+const key = INDUSTRY_ORDER.includes(params.get("i")) ? params.get("i") : "cpg";
+const D = REPORT.industries[key];
+
+document.title = D.name + " QR Benchmarks 2026 | Scanova";
+document.querySelector('meta[name="description"]').content =
+  `QR Code performance benchmarks for ${D.name}: ${D.accounts} brands, ${fmt(D.codes)} codes, ${D.scansDisplay} scans of first-party Scanova data.`;
+document.getElementById("footer-note").textContent = REPORT.meta.dataNote;
+
+/* ---------- hero ---------- */
+document.getElementById("h-eyebrow").textContent = "Industry benchmark · " + D.name;
+document.getElementById("h-title").textContent = D.heroLine;
+document.getElementById("h-summary").textContent = D.summary;
+const hp = document.getElementById("h-photo"); hp.src = D.heroImage; hp.alt = D.heroImageAlt;
+document.getElementById("h-meta").innerHTML = `
+  <div><span class="num" data-count="${D.accounts}">0</span><span class="label">Brands analyzed</span></div>
+  <div><span class="num" data-count="${D.codes}">0</span><span class="label">Live QR Codes</span></div>
+  <div><span class="num">${D.scansDisplay}</span><span class="label">Total scans</span></div>
+  <div><span class="num" data-count="${D.medianActive}">0</span><span class="label">Median scans / active code</span></div>`;
+
+const sw = document.getElementById("switcher");
+INDUSTRY_ORDER.forEach(k=>{
+  const a = document.createElement("a");
+  a.href = "industry.html?i="+k;
+  a.textContent = REPORT.industries[k].shortName;
+  if(k===key) a.className = "current";
+  sw.appendChild(a);
+});
+
+/* ---------- reveal / bars / counts ---------- */
+function countUp(el){
+  const target = parseFloat(el.dataset.count), dur = 1100, t0 = performance.now();
+  function tick(t){
+    const p = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-p,3);
+    el.textContent = Math.round(target*e).toLocaleString("en-US");
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    en.target.classList.add("in");
+    en.target.querySelectorAll(".bar-fill").forEach(b=>{ b.style.width = b.dataset.w + "%"; });
+    en.target.querySelectorAll("[data-count]").forEach(countUp);
+    if(en.target.id === "split-viz") setTimeout(fillSplit, 250);
+    io.unobserve(en.target);
+  });
+},{threshold:.25});
+
+/* ---------- 01 benchmarks ---------- */
+document.getElementById("b-lede").innerHTML =
+  `The typical active ${D.shortName} code earns <strong>${fmt(D.medianActive)} scans</strong> — the honest benchmark to measure against, since it isn't skewed by outliers or by test and undeployed codes in the data.`;
+
+const SCALE_MAX = 5e6;
+const bScale = document.getElementById("b-scale");
+(function(){
+  const axis = document.createElement("div"); axis.className = "scale-axis"; bScale.appendChild(axis);
+  [1,10,100,1e3,1e4,1e5,1e6].forEach(v=>{
+    const t = document.createElement("div"); t.className = "scale-tick";
+    t.style.left = logPos(v,SCALE_MAX)+"%";
+    t.innerHTML = `<span>${fmtCompact(v)}</span>`;
+    bScale.appendChild(t);
+  });
+  [
+    {label:"Typical code (median)", v:D.medianActive, cls:"is-red"},
+    {label:"Segment average", v:D.meanActive, cls:"is-hollow"},
+    {label:"Record code", v:D.maxCode, cls:""}
+  ].forEach(m=>{
+    const el = document.createElement("div");
+    el.className = "marker "+m.cls;
+    el.style.left = logPos(m.v,SCALE_MAX)+"%";
+    el.innerHTML = `<div class="flag">${m.label}</div><div class="val">${fmt(m.v)}</div><div class="stem"></div><div class="dot"></div>`;
+    bScale.appendChild(el);
+  });
+})();
+document.getElementById("b-note").innerHTML =
+  `The record — <strong>${fmt(D.maxCode)} scans</strong> — belongs to ${D.maxCodeDesc}. ${D.zeroPct}% of live codes have never been scanned.`;
+
+const tierBody = document.querySelector("#tier-table tbody");
+D.tiers.forEach(t=>{
+  const tr = document.createElement("tr");
+  if(t.hl) tr.className = "hl";
+  tr.innerHTML = `<td>${t.tier}</td><td class="n r">${t.codesPct}%</td><td class="n r">${t.scansPct}%</td>`;
+  tierBody.appendChild(tr);
+});
+document.getElementById("tier-note").textContent =
+  `${D.concPctCodes}% of codes (10K+ tier) generate ${D.concPctScans}% of all scans.`;
+
+document.getElementById("ab-medscans").textContent = D.accountBench.medScans;
+document.getElementById("ab-medcodes").textContent = D.accountBench.medCodes;
+document.getElementById("ab-note").textContent = D.accountNote;
+
+/* ---------- 02 concentration ---------- */
+document.getElementById("c-title").textContent = "A few codes carry the industry";
+document.getElementById("c-body").textContent =
+  `Scan volume in ${D.shortName} is not evenly earned. Codes that cleared 10,000+ scans are a sliver of the portfolio — yet they generate nearly all the engagement. The strategic question isn't how to raise the average; it's how to build more codes that behave like the top performers.`;
+document.getElementById("c-codes").textContent = D.concPctCodes + "%";
+document.getElementById("c-eq").textContent = `of codes generate ${D.concPctScans}% of all ${D.shortName} scans`;
+
+/* codes-vs-scans split bars */
+document.getElementById("sv-codes-hint").textContent = `top performers = ${D.concPctCodes}% of codes`;
+document.getElementById("sv-scans-hint").textContent = `top performers = ${D.concPctScans}% of scans`;
+function fillSplit(){
+  document.getElementById("sv-codes-bar").style.width = D.concPctCodes + "%";
+  document.getElementById("sv-scans-bar").style.width = D.concPctScans + "%";
+}
+
+/* ---------- 03 who wins ---------- */
+function renderBars(elId, rows, labelKey, valKey, redMax){
+  const el = document.getElementById(elId);
+  const max = Math.max(...rows.map(r=>r[valKey]));
+  rows.forEach(r=>{
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    row.innerHTML = `
+      <span class="name">${r[labelKey]}</span>
+      <div class="bar-track"><div class="bar-fill ${redMax && r[valKey]===max ? "red":""}" data-w="${Math.max(3, r[valKey]/max*100)}"></div></div>
+      <span class="v">${fmt(r[valKey])}</span>`;
+    el.appendChild(row);
+  });
+}
+renderBars("plan-bars", D.planTiers, "plan", "meanPerCode", false);
+renderBars("tenure-bars", D.tenure, "band", "meanPerCode", true);
+document.getElementById("plan-note").textContent = D.planNote;
+document.getElementById("tenure-note").textContent = "Mean of per-account ratios (total scans ÷ active codes), giving each account equal weight.";
+document.getElementById("tenure-callout").innerHTML = `<strong>The tenure story:</strong> ${D.tenureInsight}`;
+
+/* ---------- 04 portfolio ---------- */
+(function(){
+  const el = document.getElementById("cat-bars");
+  const rows = D.categories;
+  const max = Math.max(...rows.map(r=>r.scansPct));
+  rows.forEach(r=>{
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    row.innerHTML = `
+      <span class="name" title="${r.name}">${r.name}</span>
+      <div class="bar-track"><div class="bar-fill" data-w="${Math.max(2, r.scansPct/max*100)}"></div></div>
+      <span class="v">${r.scansPct}%</span>`;
+    el.appendChild(row);
+  });
+})();
+document.getElementById("cat-note").textContent = D.categoryInsight;
+document.getElementById("dyn-pct").textContent = D.dynamicPct + "%";
+document.getElementById("des-med").textContent = D.design.designerMed;
+document.getElementById("bw-med").textContent = D.design.bwMed;
+document.getElementById("des-story").textContent = D.design.story;
+document.getElementById("age-mean").textContent = D.longevity.meanAge;
+document.getElementById("age-oldest").textContent = D.longevity.oldest;
+document.getElementById("age-story").textContent = D.longevity.story;
+
+/* ---------- 05 use cases ---------- */
+(function(){
+  const tbody = document.querySelector("#uc-table tbody");
+  const best = Math.max(...D.useCases.map(u=>u.avgActive));
+  D.useCases.forEach(u=>{
+    const tr = document.createElement("tr");
+    if(u.avgActive === best) tr.className = "hl";
+    tr.innerHTML = `
+      <td>${u.name}</td>
+      <td class="n r">${u.codesPct}%</td>
+      <td class="n r">${u.scansPct}%</td>
+      <td class="n r"${u.avgActive===best ? ' style="color:var(--accent);font-weight:600"':''}>${fmt(u.avgActive)}</td>
+      <td class="n r">${u.activePct}%</td>`;
+    tbody.appendChild(tr);
+  });
+})();
+
+/* ---------- 06 opportunities ---------- */
+(function(){
+  const wrap = document.getElementById("opp-cards");
+  D.opportunities.forEach(o=>{
+    const c = document.createElement("div");
+    c.className = "card reveal";
+    c.innerHTML = `
+      <span class="k">${o.penetration}</span>
+      <h3>${o.name}</h3>
+      <span class="num big" style="color:var(--accent)">${fmt(o.avg)}</span>
+      <div class="small mono" style="margin-bottom:12px">avg scans per active code</div>
+      <p>${o.body}</p>`;
+    wrap.appendChild(c);
+  });
+})();
+
+/* ---------- get report ---------- */
+document.getElementById("g-title").textContent = "The " + D.shortName + " benchmark report";
+document.getElementById("g-body").textContent =
+  `The complete ${D.name} analysis — full benchmark tables, tier distributions, use-case league tables, and the opportunity map — as a designed PDF you can circulate with your team.`;
+document.getElementById("lf-industry").value = key;
+document.getElementById("lf-btn").textContent = "Send me the " + D.shortName + " report";
+document.getElementById("lead-form").addEventListener("submit", e=>{
+  e.preventDefault();
+  const form = e.target;
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  /* TODO: POST to marketing automation endpoint here */
+  form.style.display = "none";
+  document.getElementById("lead-success").classList.add("show");
+});
+
+/* ---------- next industry ---------- */
+const nextKey = INDUSTRY_ORDER[(INDUSTRY_ORDER.indexOf(key)+1) % INDUSTRY_ORDER.length];
+const nl = document.getElementById("next-link");
+nl.href = "industry.html?i="+nextKey;
+nl.textContent = "Next: " + REPORT.industries[nextKey].name + " →";
+
+/* observe reveals + hero meta */
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+io.observe(document.getElementById("h-meta"));
+io.observe(document.getElementById("split-viz"));
+</script>
+</body>
+</html>
