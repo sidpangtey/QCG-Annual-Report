@@ -318,7 +318,7 @@ document.getElementById("h-meta").innerHTML = `
   <div><span class="num" data-count="${D.accounts}">0</span><span class="label">Brands analyzed</span></div>
   <div><span class="num" data-count="${D.codes}">0</span><span class="label">Live QR Codes</span></div>
   <div><span class="num">${D.scansDisplay}</span><span class="label">Total scans</span></div>
-  <div><span class="num" data-count="${D.medianActive}">0</span><span class="label">Median scans / active code</span></div>`;
+  <div><span class="num" data-count="${D.meanActive}">0</span><span class="label">Average scans / code</span></div>`;
 
 const sw = document.getElementById("switcher");
 INDUSTRY_ORDER.forEach(k=>{

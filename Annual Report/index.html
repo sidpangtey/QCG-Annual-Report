@@ -103,7 +103,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <p class="foot-note">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them. Median and mean computed on active codes (≥1 scan) in the live portfolio.</p>
+    <p class="foot-note">Live codes are the QR Codes currently active in each portfolio (excluding deleted ones). All figures reflect every live code, including test codes and codes never deployed in a live campaign — median and average are computed on active codes (those with ≥1 scan), and we benchmark on the median because, unlike the average, it isn't distorted by the unused ones.</p>
   </div>
 </section>
 
@@ -375,8 +375,8 @@ document.querySelectorAll(".meta-strip").forEach(el=>io.observe(el));
       <td class="n r">${d.accounts}</td>
       <td class="n r">${fmt(d.codes)}</td>
       <td class="n r">${d.scansDisplay}</td>
-      <td class="n r" style="color:var(--accent);font-weight:600">${d.medianActive}</td>
-      <td class="n r">${fmt(d.meanActive)}</td>
+      <td class="n r">${d.medianActive}</td>
+      <td class="n r" style="color:var(--accent);font-weight:600">${fmt(d.meanActive)}</td>
       <td class="n r">${fmt(d.maxCode)}</td>`;
     tbody.appendChild(tr);
   });
@@ -421,7 +421,7 @@ function panelHTML(d){
       <div class="stat-row">
         <div><span class="num">${d.accounts}</span><span class="label">Brands</span></div>
         <div><span class="num">${fmt(d.codes)}</span><span class="label">Live codes</span></div>
-        <div><span class="num" data-count="${d.medianActive}">0</span><span class="label">Median scans / active code</span></div>
+        <div><span class="num" data-count="${d.meanActive}">0</span><span class="label">Average scans / code</span></div>
         <div><span class="num" style="color:var(--accent)">${d.concPctScans}%</span><span class="label">of all scans come from just ${d.concPctCodes}% of codes</span></div>
       </div>
       <div class="panel-ctas">
