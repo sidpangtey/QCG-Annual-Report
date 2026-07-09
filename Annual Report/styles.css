@@ -111,6 +111,7 @@ section.tight{padding:56px 0}
 }
 .nav-drop-menu a:hover{background:var(--accent-dim);color:var(--accent-dark)}
 .nav-drop-menu a span{display:block;font-size:12px;font-weight:400;color:var(--ink-55)}
+.nav-drop-menu a.current{color:var(--accent);font-weight:700}
 
 /* ---- buttons ---- */
 .btn{
@@ -296,7 +297,6 @@ section.tight{padding:56px 0}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
 /* ---- industry page extras ---- */
-.chapter-nav{display:flex;gap:2px;overflow:hidden}
 .page-hero{padding:72px 0 56px}
 .crumb{font-size:14px;font-weight:500;color:var(--ink-55);text-decoration:none}
 .crumb:hover{color:var(--accent)}
@@ -374,8 +374,6 @@ footer{border-top:1px solid var(--ink-12);padding:44px 0;font-size:13.5px;color:
   .cta-band-divider{display:none}
 }
 
-/* chapter nav: compact to fit alongside dual CTAs */
-.chapter-nav a{font-size:13px;padding:8px 9px}
 
 /* 2x2 card grid (methodology) */
 .cards.grid-2{grid-template-columns:repeat(2,1fr)}

@@ -15,14 +15,27 @@
 <nav class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="index.html"><img class="brand-logo" src="logo-icon-red.svg" alt="Scanova" width="26" height="26"><span>Scanova QR Benchmarks</span></a>
-    <div class="nav-links chapter-nav">
-      <a href="#benchmarks">Benchmarks</a>
-      <a href="#concentration">Concentration</a>
-      <a href="#who-wins">Who wins</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#use-cases">Use cases</a>
-      <a href="#opportunities">Opportunities</a>
-      <a href="#move-up-curve">Move up</a>
+    <div class="nav-links">
+      <div class="nav-drop" id="nav-drop-industries">
+        <button class="nav-drop-btn" aria-haspopup="true" aria-expanded="false" id="nav-drop-industries-btn">
+          Industries <span class="caret" aria-hidden="true"></span>
+        </button>
+        <div class="nav-drop-menu" role="menu" id="nav-drop-industries-menu"></div>
+      </div>
+      <div class="nav-drop" id="nav-drop-chapters">
+        <button class="nav-drop-btn" aria-haspopup="true" aria-expanded="false" id="nav-drop-chapters-btn">
+          Jump to <span class="caret" aria-hidden="true"></span>
+        </button>
+        <div class="nav-drop-menu" role="menu" id="nav-drop-chapters-menu">
+          <a role="menuitem" href="#benchmarks">01 · Benchmarks</a>
+          <a role="menuitem" href="#concentration">02 · Concentration</a>
+          <a role="menuitem" href="#who-wins">03 · Who wins</a>
+          <a role="menuitem" href="#portfolio">04 · Portfolio</a>
+          <a role="menuitem" href="#use-cases">05 · Use cases</a>
+          <a role="menuitem" href="#opportunities">06 · Opportunities</a>
+          <a role="menuitem" href="#move-up-curve">07 · Move up the curve</a>
+        </div>
+      </div>
     </div>
     <div class="nav-ctas">
       <a class="nav-cta-ghost" href="https://scanova.io/" target="_blank" rel="noopener">Explore Scanova</a>
@@ -63,7 +76,6 @@
       </div>
       <div class="scale" id="b-scale"></div>
       <p class="instrument-note" id="b-note"></p>
-      <p class="foot-note" style="margin-top:14px">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them.</p>
     </div>
 
     <div class="two-col" style="margin-top:56px">
@@ -329,6 +341,41 @@ INDUSTRY_ORDER.forEach(k=>{
   sw.appendChild(a);
 });
 
+/* ---------- nav dropdowns: industries (data-driven) + chapters ---------- */
+const navIndustriesMenu = document.getElementById("nav-drop-industries-menu");
+INDUSTRY_ORDER.forEach(k=>{
+  const a = document.createElement("a");
+  a.setAttribute("role","menuitem");
+  a.href = "industry.html?i="+k;
+  a.textContent = REPORT.industries[k].name;
+  if(k===key) a.className = "current";
+  navIndustriesMenu.appendChild(a);
+});
+
+const navDrops = [];
+function wireNavDropdown(dropId, btnId){
+  const drop = document.getElementById(dropId);
+  const btn = document.getElementById(btnId);
+  navDrops.push({drop, btn});
+  btn.addEventListener("click", e=>{
+    e.stopPropagation();
+    const willOpen = !drop.classList.contains("open");
+    navDrops.forEach(o=>{
+      if(o.drop!==drop){ o.drop.classList.remove("open"); o.btn.setAttribute("aria-expanded","false"); }
+    });
+    drop.classList.toggle("open", willOpen);
+    btn.setAttribute("aria-expanded", willOpen);
+  });
+  document.addEventListener("click", e=>{
+    if(!drop.contains(e.target)){ drop.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  });
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape"){ drop.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  });
+}
+wireNavDropdown("nav-drop-industries","nav-drop-industries-btn");
+wireNavDropdown("nav-drop-chapters","nav-drop-chapters-btn");
+
 /* ---------- reveal / bars / counts ---------- */
 function countUp(el){
   const target = parseFloat(el.dataset.count), dur = 1100, t0 = performance.now();
@@ -352,7 +399,7 @@ const io = new IntersectionObserver(entries=>{
 
 /* ---------- 01 benchmarks ---------- */
 document.getElementById("b-lede").innerHTML =
-  `The typical active ${D.shortName} code earns <strong>${fmt(D.medianActive)} scans</strong> — the honest benchmark to measure against, since it isn't skewed by outliers or by test and undeployed codes in the data.`;
+  `What does a good ${D.shortName} code look like? Typical is <strong>${fmt(D.medianActive)} scans</strong>. Average is <strong>${fmt(D.meanActive)}</strong>. The record is <strong>${fmt(D.maxCode)}</strong> — and that gap is the story.`;
 
 const SCALE_MAX = 5e6;
 const bScale = document.getElementById("b-scale");
