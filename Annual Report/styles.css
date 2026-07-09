@@ -164,6 +164,15 @@ section.tight{padding:56px 0}
 .marker.is-hollow .dot{background:var(--paper);border:2px solid var(--ink)}
 .instrument-note{margin-top:24px;font-size:14px;color:var(--ink-70);max-width:72ch}
 
+/* ---- multi-industry marker scale (hub: all industries on one axis) ---- */
+.scale-multi{height:230px}
+.scale-multi .scale-axis,.scale-multi .scale-tick{top:182px}
+.scale-multi .marker{top:auto;bottom:48px}
+.scale-multi .marker .stem{height:22px}
+.scale-multi .marker.lane-1 .stem{height:48px}
+.scale-multi .marker.lane-2 .stem{height:74px}
+.scale-multi .marker.lane-3 .stem{height:100px}
+
 /* ---- tabs ---- */
 .tabs{display:flex;gap:0;border-bottom:2px solid var(--ink-12);overflow-x:auto;margin-top:36px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
@@ -255,6 +264,24 @@ section.tight{padding:56px 0}
 .finding h3{margin-bottom:8px}
 .finding p{color:var(--ink-70);max-width:72ch}
 @media(max-width:640px){.finding{grid-template-columns:1fr;gap:8px}}
+
+/* ---- move up the curve (rung ladder) ---- */
+.curve{margin-top:8px}
+.rung{
+  display:grid;grid-template-columns:96px minmax(0,1fr);gap:28px;
+  padding:36px 0;border-top:1px solid var(--ink-12);
+}
+.rung:last-of-type{border-bottom:1px solid var(--ink-12)}
+.rung .rnum{font-weight:800;font-size:32px;color:var(--accent);letter-spacing:-.02em;display:flex;align-items:flex-start;gap:6px}
+.rung .rnum .arrow{font-size:18px;line-height:1;margin-top:4px}
+.rung h3{margin-bottom:10px}
+.rung .rung-insight{color:var(--ink-70);max-width:72ch;margin-bottom:14px}
+.rung .rung-action{
+  display:flex;gap:12px;padding:14px 16px;background:var(--accent-dim);
+  border-radius:var(--radius-sm);color:var(--ink);font-size:14.5px;max-width:72ch;
+}
+.rung .rung-action .tag{flex:none;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:1px}
+@media(max-width:640px){.rung{grid-template-columns:1fr;gap:8px}}
 
 /* ---- lead capture ---- */
 .lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}

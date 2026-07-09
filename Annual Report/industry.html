@@ -22,6 +22,7 @@
       <a href="#portfolio">Portfolio</a>
       <a href="#use-cases">Use cases</a>
       <a href="#opportunities">Opportunities</a>
+      <a href="#move-up-curve">Move up</a>
     </div>
     <div class="nav-ctas">
       <a class="nav-cta-ghost" href="https://scanova.io/" target="_blank" rel="noopener">Explore Scanova</a>
@@ -209,6 +210,16 @@
     <h2 style="max-width:24ch">High-performing use cases your peers haven't touched</h2>
     <p class="lede">Every use case below is already proven inside this industry — by a small number of accounts. That's not a prediction; it's a head start.</p>
     <div class="cards" id="opp-cards"></div>
+  </div>
+</section>
+
+<!-- ============ 07 MOVE UP THE CURVE ============ -->
+<section class="tight band" id="move-up-curve">
+  <div class="wrap">
+    <p class="eyebrow">Chapter 07 · Move up the curve</p>
+    <h2 style="max-width:24ch">How to move up the curve in <span id="mu-industry"></span></h2>
+    <p class="lede" id="mu-lede"></p>
+    <div class="curve" id="mu-rungs"></div>
   </div>
 </section>
 
@@ -471,6 +482,49 @@ document.getElementById("age-story").textContent = D.longevity.story;
       <div class="small mono" style="margin-bottom:12px">avg scans per active code</div>
       <p>${o.body}</p>`;
     wrap.appendChild(c);
+  });
+})();
+
+/* ---------- 07 move up the curve (industry-specific, data-driven) ---------- */
+(function(){
+  document.getElementById("mu-industry").textContent = D.shortName;
+  document.getElementById("mu-lede").textContent =
+    `Three rungs from a typical ${D.shortName} code to an elite one — each grounded in this industry's own data, not a guarantee for any single code.`;
+
+  const bestUC = D.useCases.slice().sort((a,b)=>b.avgActive-a.avgActive)[0];
+  const topOpp = D.opportunities.slice(0,2);
+
+  const rungs = [
+    {
+      title: "Get off zero, reach the median",
+      insight: `${D.zeroPct}% of live ${D.shortName} codes have never been scanned.`,
+      action: `${D.dynamicPct}% of scanning codes in this industry are Dynamic QR Codes placed somewhere with genuine intent to act — that combination is what the data associates with a code clearing zero and reaching the ${fmt(D.medianActive)}-scan median.`
+    },
+    {
+      title: "Median to strong performer",
+      insight: `The highest-earning use case in ${D.shortName} is "${bestUC.name}," averaging ${fmt(bestUC.avgActive)} scans per active code — ${(bestUC.avgActive/D.medianActive).toFixed(1)}× the segment median.`,
+      action: `Moving a code from a generic redirect to a higher-intent use case like this is what the data associates with the jump from typical to strong. See the opportunity map above for how underused it still is.`
+    },
+    {
+      title: "Strong to elite",
+      insight: `${D.longevity.story} Just ${D.concPctCodes}% of codes generate ${D.concPctScans}% of all scans in this industry.`,
+      action: `${topOpp.map(o=>`"${o.name}" (avg ${fmt(o.avg)}, deployed by ${o.penetration})`).join(" and ")} — proven, underused use cases the data associates with the elite tier.`
+    }
+  ];
+
+  const wrap = document.getElementById("mu-rungs");
+  rungs.forEach((r,i)=>{
+    const el = document.createElement("div");
+    el.className = "rung reveal";
+    el.innerHTML = `
+      <div class="rnum"><span class="arrow" aria-hidden="true">↑</span>0${i+1}</div>
+      <div>
+        <h3>${r.title}</h3>
+        <p class="rung-insight">${r.insight}</p>
+        <div class="rung-action"><span class="tag">Data suggests</span><span>${r.action}</span></div>
+      </div>`;
+    wrap.appendChild(el);
+    io.observe(el);
   });
 })();
 

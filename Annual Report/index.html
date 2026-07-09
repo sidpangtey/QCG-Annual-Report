@@ -73,18 +73,52 @@
 <section class="tight band" id="instrument">
   <div class="wrap">
     <p class="eyebrow">The benchmark instrument</p>
-    <h2 style="max-width:24ch">Median, average, and record scans per code, by industry</h2>
-    <p class="lede">Pick an industry. The median shows scans a typical code gets. The average shows the number of scans a few top performers get. The record shows what the record high performance looks like, and how much room you have to grow.</p>
+    <h2 style="max-width:24ch">Median scans per code, by industry</h2>
+    <p class="lede">The median is the number to measure yourself against — plotted for all four industries below. The table underneath holds the full detail, including where the average pulls away from it.</p>
 
     <div class="instrument reveal">
       <div class="instrument-head">
-        <span class="instrument-title">Scans per QR Code · active codes · all-time</span>
-        <div class="seg" id="instr-seg" role="group" aria-label="Choose industry"></div>
+        <span class="instrument-title">Median scans per QR Code · active codes · all-time</span>
       </div>
-      <div class="scale" id="instr-scale" aria-live="polite"></div>
-      <p class="instrument-note" id="instr-note"></p>
-      <p class="foot-note" style="margin-top:14px">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them.</p>
+      <div class="scale scale-multi" id="instr-scale" aria-live="polite"></div>
     </div>
+
+    <div class="tbl-scroll reveal" style="margin-top:40px">
+      <table class="tbl" id="compare-table">
+        <thead>
+          <tr>
+            <th>Industry</th>
+            <th class="r">Brands</th>
+            <th class="r">Live codes</th>
+            <th class="r">Total scans</th>
+            <th class="r">Median / code</th>
+            <th class="r">Average / code</th>
+            <th class="r">Record code</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="foot-note">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them.</p>
+  </div>
+</section>
+
+<!-- ============ UNIVERSAL FINDINGS ============ -->
+<section id="findings">
+  <div class="wrap">
+    <p class="eyebrow">What the data shows</p>
+    <h2 style="max-width:20ch">Five findings that hold in every industry</h2>
+    <div id="findings-list" style="margin-top:36px"></div>
+  </div>
+</section>
+
+<!-- ============ MOVE UP THE CURVE ============ -->
+<section id="move-up-curve">
+  <div class="wrap">
+    <p class="eyebrow">What to do with this</p>
+    <h2 style="max-width:22ch">How to move up the curve</h2>
+    <p class="lede">The data doesn't just show where codes land — it shows what tends to separate a typical code from an elite one. Three rungs, each grounded in what we measured, not a promise of what happens to any single code.</p>
+    <div class="curve" id="curve-rungs"></div>
   </div>
 </section>
 
@@ -96,40 +130,6 @@
 
     <div class="tabs" role="tablist" id="industry-tabs"></div>
     <div id="industry-panels"></div>
-  </div>
-</section>
-
-<!-- ============ CROSS-INDUSTRY COMPARISON ============ -->
-<section class="tight band">
-  <div class="wrap">
-    <p class="eyebrow">Side by side</p>
-    <h2 style="max-width:22ch">Every industry benchmark in one view</h2>
-    <p class="lede">Compare your industry against the other three. The median is the benchmark to measure against. The record is the QR Code performance ceiling.</p>
-    <div class="tbl-scroll reveal">
-      <table class="tbl" id="compare-table">
-        <thead>
-          <tr>
-            <th>Industry</th>
-            <th class="r">Brands</th>
-            <th class="r">Live codes</th>
-            <th class="r">Total scans</th>
-            <th class="r">Median / code</th>
-            <th class="r">Record code</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <p class="foot-note">Median and mean computed on active codes (≥1 scan) in the live portfolio.</p>
-  </div>
-</section>
-
-<!-- ============ UNIVERSAL FINDINGS ============ -->
-<section id="findings">
-  <div class="wrap">
-    <p class="eyebrow">What the data shows</p>
-    <h2 style="max-width:20ch">Five findings that hold in every industry</h2>
-    <div id="findings-list" style="margin-top:36px"></div>
   </div>
 </section>
 
@@ -371,29 +371,12 @@ const io = new IntersectionObserver(entries=>{
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 document.querySelectorAll(".meta-strip").forEach(el=>io.observe(el));
 
-/* ---------- benchmark instrument ---------- */
+/* ---------- benchmark instrument: all industries on one scale ---------- */
 const SCALE_MAX = 5e6;
-const seg = document.getElementById("instr-seg");
 const scale = document.getElementById("instr-scale");
-const note = document.getElementById("instr-note");
 
-INDUSTRY_ORDER.forEach((k,i)=>{
-  const d = REPORT.industries[k];
-  const b = document.createElement("button");
-  b.textContent = d.shortName;
-  b.setAttribute("aria-pressed", i===0 ? "true" : "false");
-  b.addEventListener("click", ()=>{ 
-    seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));
-    b.setAttribute("aria-pressed","true");
-    renderInstrument(k);
-  });
-  seg.appendChild(b);
-});
-
-function renderInstrument(key){
-  const d = REPORT.industries[key];
+(function renderCompareScale(){
   scale.innerHTML = "";
-  /* axis + ticks */
   const axis = document.createElement("div"); axis.className = "scale-axis"; scale.appendChild(axis);
   [1,10,100,1e3,1e4,1e5,1e6].forEach(v=>{
     const t = document.createElement("div"); t.className = "scale-tick";
@@ -401,21 +384,35 @@ function renderInstrument(key){
     t.innerHTML = `<span>${fmtCompact(v)}</span>`;
     scale.appendChild(t);
   });
-  const markers = [
-    {label:"Typical code (median)", v:d.medianActive, cls:"is-red"},
-    {label:"Segment average", v:d.meanActive, cls:"is-hollow"},
-    {label:"Record code", v:d.maxCode, cls:""}
-  ];
-  markers.forEach(m=>{
+  /* stagger labels by ascending median so close values (all four cluster
+     between 8 and 23) get their own vertical lane instead of overlapping */
+  const sorted = INDUSTRY_ORDER.map(k=>REPORT.industries[k]).slice().sort((a,b)=>a.medianActive-b.medianActive);
+  sorted.forEach((d,i)=>{
     const el = document.createElement("div");
-    el.className = "marker "+m.cls;
-    el.style.left = logPos(m.v,SCALE_MAX)+"%";
-    el.innerHTML = `<div class="flag">${m.label}</div><div class="val">${fmt(m.v)}</div><div class="stem"></div><div class="dot"></div>`;
+    el.className = `marker is-red lane-${i}`;
+    el.style.left = logPos(d.medianActive,SCALE_MAX)+"%";
+    el.innerHTML = `<div class="flag">${d.shortName}</div><div class="val">${fmt(d.medianActive)}</div><div class="stem"></div><div class="dot"></div>`;
     scale.appendChild(el);
   });
-  note.innerHTML = `<strong>${d.name}:</strong> the typical active code earns <strong>${fmt(d.medianActive)}</strong> scans. The average (${fmt(d.meanActive)}) sits far from it — dragged up by a handful of outlier codes and down by inactive ones — so it describes no real code. That gap is the story: performance is concentrated, and the median is the honest benchmark.`;
-}
-renderInstrument("cpg");
+})();
+
+/* ---------- comparison table (median + average adjacent — the gap is the insight) ---------- */
+(function(){
+  const tbody = document.querySelector("#compare-table tbody");
+  INDUSTRY_ORDER.forEach(k=>{
+    const d = REPORT.industries[k];
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><a href="industry.html?i=${d.slug}" style="text-decoration:none;font-weight:600">${d.name}</a></td>
+      <td class="n r">${d.accounts}</td>
+      <td class="n r">${fmt(d.codes)}</td>
+      <td class="n r">${d.scansDisplay}</td>
+      <td class="n r" style="color:var(--accent);font-weight:600">${d.medianActive}</td>
+      <td class="n r">${fmt(d.meanActive)}</td>
+      <td class="n r">${fmt(d.maxCode)}</td>`;
+    tbody.appendChild(tr);
+  });
+})();
 
 /* ---------- industry tabs ---------- */
 const tabs = document.getElementById("industry-tabs");
@@ -486,21 +483,6 @@ function selectTab(key){
 /* animate the initially visible panel via observer */
 io.observe(document.getElementById("panel-cpg"));
 
-/* ---------- comparison table ---------- */
-const tbody = document.querySelector("#compare-table tbody");
-INDUSTRY_ORDER.forEach(k=>{
-  const d = REPORT.industries[k];
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td><a href="industry.html?i=${d.slug}" style="text-decoration:none;font-weight:600">${d.name}</a></td>
-    <td class="n r">${d.accounts}</td>
-    <td class="n r">${fmt(d.codes)}</td>
-    <td class="n r">${d.scansDisplay}</td>
-    <td class="n r" style="color:var(--accent);font-weight:600">${d.medianActive}</td>
-    <td class="n r">${fmt(d.maxCode)}</td>`;
-  tbody.appendChild(tr);
-});
-
 /* ---------- findings ---------- */
 const fl = document.getElementById("findings-list");
 REPORT.universalFindings.forEach((f,i)=>{
@@ -510,6 +492,52 @@ REPORT.universalFindings.forEach((f,i)=>{
   fl.appendChild(el);
   io.observe(el);
 });
+
+/* ---------- move up the curve (cross-industry aggregate) ---------- */
+(function(){
+  const inds = INDUSTRY_ORDER.map(k=>REPORT.industries[k]);
+  const zeroLo = Math.min(...inds.map(d=>d.zeroPct)), zeroHi = Math.max(...inds.map(d=>d.zeroPct));
+  const dynLo = Math.min(...inds.map(d=>d.dynamicPct)), dynHi = Math.max(...inds.map(d=>d.dynamicPct));
+  const concCodesLo = Math.min(...inds.map(d=>d.concPctCodes)), concCodesHi = Math.max(...inds.map(d=>d.concPctCodes));
+  const concScansLo = Math.min(...inds.map(d=>d.concPctScans)), concScansHi = Math.max(...inds.map(d=>d.concPctScans));
+  const oldestMax = inds.reduce((m,d)=>{
+    const n = parseFloat(d.longevity.oldest);
+    return n > m.n ? {n, label:d.longevity.oldest} : m;
+  }, {n:0, label:""}).label;
+
+  const rungs = [
+    {
+      title: "Get off zero, reach the median",
+      insight: `Between ${zeroLo}% and ${zeroHi}% of QR Codes across the four industries we studied have never recorded a single scan.`,
+      action: `Dynamic QR Codes placed somewhere with genuine footfall and a clear, single use case are what the data associates with clearing zero — ${dynLo}%–${dynHi}% of scanning codes in this study already are dynamic.`
+    },
+    {
+      title: "Median to strong performer",
+      insight: "Generic website-redirect codes cluster near the median in every industry we studied, while specific, high-intent use cases — tutorials, menus, app downloads, bookings — out-scan them by a wide margin.",
+      action: "Moving from a generic redirect to the use case your industry's data shows performing best is what tends to separate a median code from a strong one. Each industry page below names that use case."
+    },
+    {
+      title: "Strong to elite",
+      insight: `Performance compounds with time — the oldest live codes in this data are still scanning after ${oldestMax}. And in every industry, a sliver of codes (${concCodesLo}%–${concCodesHi}%) accounts for the bulk of scans (${concScansLo}%–${concScansHi}%).`,
+      action: "Long-running placements and the underused, high-performing use cases already proven in each industry's data are what the elite tier has in common. Each industry page's opportunity map names them."
+    }
+  ];
+
+  const wrap = document.getElementById("curve-rungs");
+  rungs.forEach((r,i)=>{
+    const el = document.createElement("div");
+    el.className = "rung reveal";
+    el.innerHTML = `
+      <div class="rnum"><span class="arrow" aria-hidden="true">↑</span>0${i+1}</div>
+      <div>
+        <h3>${r.title}</h3>
+        <p class="rung-insight">${r.insight}</p>
+        <div class="rung-action"><span class="tag">Data suggests</span><span>${r.action}</span></div>
+      </div>`;
+    wrap.appendChild(el);
+    io.observe(el);
+  });
+})();
 
 /* ---------- lead form (front-end only; wire to backend) ---------- */
 document.getElementById("lead-form").addEventListener("submit", e=>{
