@@ -164,15 +164,6 @@ section.tight{padding:56px 0}
 .marker.is-hollow .dot{background:var(--paper);border:2px solid var(--ink)}
 .instrument-note{margin-top:24px;font-size:14px;color:var(--ink-70);max-width:72ch}
 
-/* ---- multi-industry marker scale (hub: all industries on one axis) ---- */
-.scale-multi{height:230px}
-.scale-multi .scale-axis,.scale-multi .scale-tick{top:182px}
-.scale-multi .marker{top:auto;bottom:48px}
-.scale-multi .marker .stem{height:22px}
-.scale-multi .marker.lane-1 .stem{height:48px}
-.scale-multi .marker.lane-2 .stem{height:74px}
-.scale-multi .marker.lane-3 .stem{height:100px}
-
 /* ---- tabs ---- */
 .tabs{display:flex;gap:0;border-bottom:2px solid var(--ink-12);overflow-x:auto;margin-top:36px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}

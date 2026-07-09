@@ -69,19 +69,23 @@
   </div>
 </header>
 
+<!-- ============ INDUSTRY TABS ============ -->
+<section id="industries">
+  <div class="wrap">
+    <p class="eyebrow">Pick your industry</p>
+    <h2 style="max-width:20ch">Four industries. Four very different scan economies.</h2>
+
+    <div class="tabs" role="tablist" id="industry-tabs"></div>
+    <div id="industry-panels"></div>
+  </div>
+</section>
+
 <!-- ============ BENCHMARK INSTRUMENT ============ -->
 <section class="tight band" id="instrument">
   <div class="wrap">
     <p class="eyebrow">The benchmark instrument</p>
-    <h2 style="max-width:24ch">Median scans per code, by industry</h2>
-    <p class="lede">The median is the number to measure yourself against — plotted for all four industries below. The table underneath holds the full detail, including where the average pulls away from it.</p>
-
-    <div class="instrument reveal">
-      <div class="instrument-head">
-        <span class="instrument-title">Median scans per QR Code · active codes · all-time</span>
-      </div>
-      <div class="scale scale-multi" id="instr-scale" aria-live="polite"></div>
-    </div>
+    <h2 style="max-width:24ch">Every industry benchmark in one view</h2>
+    <p class="lede">Compare your industry against the other three. The median is the benchmark to measure against. The record is the QR Code performance ceiling.</p>
 
     <div class="tbl-scroll reveal" style="margin-top:40px">
       <table class="tbl" id="compare-table">
@@ -99,7 +103,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <p class="foot-note">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them.</p>
+    <p class="foot-note">All figures reflect every QR Code created on the platform, including test codes and codes never deployed in a live campaign. We benchmark on the median because, unlike the average, it isn't distorted by them. Median and mean computed on active codes (≥1 scan) in the live portfolio.</p>
   </div>
 </section>
 
@@ -119,17 +123,6 @@
     <h2 style="max-width:22ch">How to move up the curve</h2>
     <p class="lede">The data doesn't just show where codes land — it shows what tends to separate a typical code from an elite one. Three rungs, each grounded in what we measured, not a promise of what happens to any single code.</p>
     <div class="curve" id="curve-rungs"></div>
-  </div>
-</section>
-
-<!-- ============ INDUSTRY TABS ============ -->
-<section id="industries">
-  <div class="wrap">
-    <p class="eyebrow">Pick your industry</p>
-    <h2 style="max-width:20ch">Four industries. Four very different scan economies.</h2>
-
-    <div class="tabs" role="tablist" id="industry-tabs"></div>
-    <div id="industry-panels"></div>
   </div>
 </section>
 
@@ -370,31 +363,6 @@ const io = new IntersectionObserver(entries=>{
 
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 document.querySelectorAll(".meta-strip").forEach(el=>io.observe(el));
-
-/* ---------- benchmark instrument: all industries on one scale ---------- */
-const SCALE_MAX = 5e6;
-const scale = document.getElementById("instr-scale");
-
-(function renderCompareScale(){
-  scale.innerHTML = "";
-  const axis = document.createElement("div"); axis.className = "scale-axis"; scale.appendChild(axis);
-  [1,10,100,1e3,1e4,1e5,1e6].forEach(v=>{
-    const t = document.createElement("div"); t.className = "scale-tick";
-    t.style.left = logPos(v,SCALE_MAX)+"%";
-    t.innerHTML = `<span>${fmtCompact(v)}</span>`;
-    scale.appendChild(t);
-  });
-  /* stagger labels by ascending median so close values (all four cluster
-     between 8 and 23) get their own vertical lane instead of overlapping */
-  const sorted = INDUSTRY_ORDER.map(k=>REPORT.industries[k]).slice().sort((a,b)=>a.medianActive-b.medianActive);
-  sorted.forEach((d,i)=>{
-    const el = document.createElement("div");
-    el.className = `marker is-red lane-${i}`;
-    el.style.left = logPos(d.medianActive,SCALE_MAX)+"%";
-    el.innerHTML = `<div class="flag">${d.shortName}</div><div class="val">${fmt(d.medianActive)}</div><div class="stem"></div><div class="dot"></div>`;
-    scale.appendChild(el);
-  });
-})();
 
 /* ---------- comparison table (median + average adjacent — the gap is the insight) ---------- */
 (function(){
