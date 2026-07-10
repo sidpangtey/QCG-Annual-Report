@@ -159,6 +159,7 @@
   <div class="wrap">
     <p class="eyebrow">Chapter 04 · What's being scanned</p>
     <h2 style="max-width:22ch">Inside the portfolio</h2>
+    <p class="lede" id="portfolio-intro"></p>
 
     <div class="reveal portfolio-bars" style="margin-top:36px">
       <h3>Code types — % of total scans by category</h3>
@@ -170,7 +171,7 @@
       <div class="card">
         <span class="k">Dynamic vs Static QR Codes</span>
         <span class="num big" id="dyn-pct"></span>
-        <p>of live codes are Dynamic QR Codes. Static QR Codes recorded <strong>zero</strong> scan activity in this segment.</p>
+        <p id="dyn-note"></p>
       </div>
       <div class="card">
         <span class="k">Custom design finding</span>
@@ -197,7 +198,7 @@
   <div class="wrap">
     <p class="eyebrow">Chapter 05 · Use-case intelligence</p>
     <h2 style="max-width:24ch">What's deployed — and what actually performs</h2>
-    <p class="lede">Deployment share tells you what the industry does. Scans per active code tells you what works. They are rarely the same thing.</p>
+    <p class="lede" id="uc-intro"></p>
     <div class="tbl-scroll reveal">
       <table class="tbl" id="uc-table">
         <thead>
@@ -221,7 +222,7 @@
   <div class="wrap">
     <p class="eyebrow">Chapter 06 · The opportunity map</p>
     <h2 style="max-width:24ch">High-performing use cases your peers haven't touched</h2>
-    <p class="lede">Every use case below is already proven inside this industry — by a small number of accounts. That's not a prediction; it's a head start.</p>
+    <p class="lede" id="opp-intro"></p>
     <div class="cards" id="opp-cards"></div>
   </div>
 </section>
@@ -445,8 +446,7 @@ document.getElementById("ab-note").textContent = D.accountNote;
 
 /* ---------- 02 concentration ---------- */
 document.getElementById("c-title").textContent = "A few codes carry the industry";
-document.getElementById("c-body").textContent =
-  `Scan volume in ${D.shortName} is not evenly earned. Codes that cleared 10,000+ scans are a sliver of the portfolio — yet they generate nearly all the engagement. The strategic question isn't how to raise the average; it's how to build more codes that behave like the top performers.`;
+document.getElementById("c-body").textContent = D.concentrationBody;
 document.getElementById("c-codes").textContent = D.concPctCodes + "%";
 document.getElementById("c-eq").textContent = `of codes generate ${D.concPctScans}% of all ${D.shortName} scans`;
 
@@ -494,7 +494,9 @@ document.getElementById("tenure-callout").innerHTML = `<strong>The tenure story:
   });
 })();
 document.getElementById("cat-note").textContent = D.categoryInsight;
+document.getElementById("portfolio-intro").textContent = D.portfolioIntro;
 document.getElementById("dyn-pct").textContent = D.dynamicPct + "%";
+document.getElementById("dyn-note").innerHTML = D.dynamicNote;
 document.getElementById("des-med").textContent = D.design.designerMed;
 document.getElementById("bw-med").textContent = D.design.bwMed;
 document.getElementById("des-story").textContent = D.design.story;
@@ -503,6 +505,7 @@ document.getElementById("age-oldest").textContent = D.longevity.oldest;
 document.getElementById("age-story").textContent = D.longevity.story;
 
 /* ---------- 05 use cases ---------- */
+document.getElementById("uc-intro").textContent = D.useCaseIntro;
 (function(){
   const tbody = document.querySelector("#uc-table tbody");
   const best = Math.max(...D.useCases.map(u=>u.avgActive));
@@ -520,6 +523,7 @@ document.getElementById("age-story").textContent = D.longevity.story;
 })();
 
 /* ---------- 06 opportunities ---------- */
+document.getElementById("opp-intro").textContent = D.opportunityIntro;
 (function(){
   const wrap = document.getElementById("opp-cards");
   D.opportunities.forEach(o=>{
@@ -538,8 +542,7 @@ document.getElementById("age-story").textContent = D.longevity.story;
 /* ---------- 07 move up the curve (industry-specific, data-driven) ---------- */
 (function(){
   document.getElementById("mu-industry").textContent = D.shortName;
-  document.getElementById("mu-lede").textContent =
-    `Three rungs from a typical ${D.shortName} code to an elite one — each grounded in this industry's own data, not a guarantee for any single code.`;
+  document.getElementById("mu-lede").textContent = D.curveIntro;
 
   const bestUC = D.useCases.slice().sort((a,b)=>b.avgActive-a.avgActive)[0];
   const topOpp = D.opportunities.slice(0,2);
@@ -548,17 +551,17 @@ document.getElementById("age-story").textContent = D.longevity.story;
     {
       title: "Get off zero, reach the median",
       insight: `${D.zeroPct}% of live ${D.shortName} codes have never been scanned.`,
-      action: `${D.dynamicPct}% of scanning codes in this industry are Dynamic QR Codes placed somewhere with genuine intent to act — that combination is what the data associates with a code clearing zero and reaching the ${fmt(D.medianActive)}-scan median.`
+      action: `${D.dynamicPct}% of scanning codes in this industry are Dynamic QR Codes placed somewhere with genuine intent to act — the data ties that combination to codes clearing zero and reaching the ${fmt(D.medianActive)}-scan median.`
     },
     {
       title: "Median to strong performer",
       insight: `The highest-earning use case in ${D.shortName} is "${bestUC.name}," averaging ${fmt(bestUC.avgActive)} scans per active code — ${(bestUC.avgActive/D.medianActive).toFixed(1)}× the segment median.`,
-      action: `Moving a code from a generic redirect to a higher-intent use case like this is what the data associates with the jump from typical to strong. See the opportunity map above for how underused it still is.`
+      action: `Moving a code from a generic redirect to a higher-intent use case like this tends to track with the jump from typical to strong in this data. See the opportunity map above for how underused it still is.`
     },
     {
       title: "Strong to elite",
       insight: `${D.longevity.story} Just ${D.concPctCodes}% of codes generate ${D.concPctScans}% of all scans in this industry.`,
-      action: `${topOpp.map(o=>`"${o.name}" (avg ${fmt(o.avg)}, deployed by ${o.penetration})`).join(" and ")} — proven, underused use cases the data associates with the elite tier.`
+      action: `${topOpp.map(o=>`"${o.name}" (avg ${fmt(o.avg)}, deployed by ${o.penetration})`).join(" and ")} — proven, underused use cases this data links to the elite tier.`
     }
   ];
 
