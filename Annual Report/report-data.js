@@ -67,6 +67,7 @@ const REPORT = {
       concCells: 5,
       heroLine: "The typical packaging code earns 21 scans. The elite 5% earn almost everything else.",
       summary: "28 CPG brands, 8,514 live codes, 46.9 million scans — the deepest scan pool of any industry we analyzed. CPG is a segment of extremes: broad portfolios of low-traffic codes coexisting with individual packaging codes that clear 2.7 million scans.",
+      teaser: "Packaging is where QR Code performance gets most extreme — most codes on the shelf move quietly, while a select few packaging placements pull in millions of scans on their own. What separates the two has less to do with luck than with where the code sits and what it's asked to do.",
       tabInsights: [
         "<strong>How-to video codes average 19,181 scans</strong> — the highest per-code rate in the industry, yet deployed by just 2 of 28 brands.",
         "<strong>Custom-designed codes out-scan black-and-white 2.4× at the median</strong> — the clearest design payoff of any industry.",
@@ -153,6 +154,7 @@ const REPORT = {
       concCells: 1,
       heroLine: "Half a percent of codes carry 85% of scans — the steepest concentration curve in the study.",
       summary: "93 manufacturers, 18,182 live codes, 9.3 million scans — the largest customer base and code portfolio of any industry analyzed. Manufacturing deploys QR at operational scale: documentation, fitment, and field-sales codes in high volume, punctuated by a few campaign codes that dominate scan share.",
+      teaser: "Manufacturing runs QR Codes at industrial scale — most of the portfolio is documentation and spec sheets doing quiet, necessary work, while a small set of campaign and field-sales codes carry almost the entire scan volume. It's the steepest concentration curve of any industry we studied, and it says a lot about where the real opportunity sits.",
       tabInsights: [
         "<strong>Promotional campaign codes average 2,578 scans — 2.8× brand-website codes</strong> — yet fewer than 10 of 93 accounts run them.",
         "<strong>Fitment / parts-lookup codes post a 96% active rate</strong>, the highest of any use case in the segment.",
@@ -240,6 +242,7 @@ const REPORT = {
       concCells: 3,
       heroLine: "Hospitality has the healthiest portfolios in the study — and the menu is the engine.",
       summary: "52 hotel and resort operators, 4,136 live codes, 7.4 million scans — Hotels have the highest median scans per code and the lowest zero-scan rate (15.1%) of any industry. Their benchmarks are also the least skewed by a few top performers. QR Codes are built into daily operations, including menus, guest services, and reviews.",
+      teaser: "Hospitality is the healthiest portfolio in the study — fewer dead codes, a higher typical scan rate, and none of the wild extremes that define other industries. QR Codes here aren't a side project; they're woven into daily operations, from the dining table to the front desk to the post-stay review.",
       tabInsights: [
         "<strong>Menu & dining codes are 17.7% of codes but 43.4% of all scans</strong> — the single highest-impact use case in any industry analyzed.",
         "<strong>Guest review codes post a 96% active rate</strong> — every deployed review code gets scanned.",
@@ -327,6 +330,7 @@ const REPORT = {
       concCells: 2,
       heroLine: "A third of the portfolio is compliance codes. The scans live somewhere else entirely.",
       summary: "38 food and beverage manufacturers, 5,978 live codes, 6.4 million scans — F&B splits into 2 portfolios living side by side: a large number of QR Codes for spec sheets and labels with minimal traffic, and a small share of engagement QR Codes via brand sites, apps, promotions earning almost all the scans.",
+      teaser: "F&B Manufacturing is really two portfolios wearing one label: a large body of compliance codes — spec sheets, regulatory labels — that barely get scanned, sitting alongside a much smaller set of consumer-facing codes that account for nearly all the engagement. Knowing which one you're deploying changes everything.",
       tabInsights: [
         "<strong>App-download codes average 9,382 scans — the segment's highest rate</strong> — deployed by fewer than 5 of 38 manufacturers.",
         "<strong>Spec-sheet and document codes are 33.7% of the portfolio but 0.7% of scans</strong> — compliance-driven deployment at scale.",
