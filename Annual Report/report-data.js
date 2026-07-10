@@ -126,6 +126,15 @@ const REPORT = {
         { name: "Registration & warranty", avg: 2187, penetration: "2 of 28 brands", body: "95% active rate. Post-purchase registration turns a scan into owned first-party consumer data." },
         { name: "Product support", avg: 2074, penetration: "1 of 28 brands", body: "Every product with a setup flow, FAQ, or support need is a deployment slot. Used by one account today." },
         { name: "Loyalty & rewards", avg: 178, penetration: "1 of 28 brands", body: "Only two loyalty codes exist in the entire CPG dataset — packaging is a direct loyalty channel almost nobody uses." }
+      ],
+      faqs: [
+        { q: "How are QR codes used on packaging in the CPG industry?", a: "Predominantly as links to a brand or product page — 90.8% of CPG QR Codes point to a brand/product website, accounting for 95.8% of all scans. The rest cover how-to videos, product info, sampling and redemption, registration, and support." },
+        { q: "What percentage of QR codes on packaging actually get scanned?", a: "81.2% of live CPG codes have recorded at least one scan; the remaining 18.8% have never been scanned — typically test codes or codes never deployed in a live campaign." },
+        { q: "What's a normal QR code scan rate on packaging?", a: "The median active CPG code earns 21 scans. The average is far higher, at 6,781, pulled up by a small number of high-traffic codes — which is why the median is the more honest benchmark." },
+        { q: "What is connected packaging, and how well does it perform?", a: "Connected packaging is packaging with an embedded QR Code linking to digital content. In CPG it performs unevenly: most codes just redirect to a generic brand website, but purpose-built Custom Pages are 9.7% of codes yet drive 48.9% of scans, and how-to videos average 19,181 scans per code — the highest per-code rate in the industry." },
+        { q: "How do CPG brands use QR codes for consumer engagement?", a: "Beyond the default brand-website link: sampling and redemption (100% active rate wherever deployed), product registration and warranty (95% active), and product support — all proven but each used by only one or two of the 28 brands in this data." },
+        { q: "Are custom-designed QR codes more engaging than plain ones?", a: "Yes, decisively — the typical custom-designed CPG code earns 38 scans versus 16 for plain black-and-white, a 2.4× median lift, the clearest design payoff of any industry studied." },
+        { q: "Where can I get a full QR code scan report for CPG?", a: "The complete CPG & Consumer Goods benchmark report is available as a free PDF further down this page." }
       ]
     },
 
@@ -214,6 +223,17 @@ const REPORT = {
         { name: "App download", avg: 843, penetration: "~8 of 93 accounts", body: "Manufacturers with parts catalogues, fitment tools, or service apps have an immediate high-value deployment channel on product and packaging." },
         { name: "Fitment / parts lookup", avg: 410, penetration: "~5 of 93 accounts", body: "96% active rate — the highest of any use case. Any brand selling parts, blades, filters, or consumables requiring compatibility lookup should deploy this." },
         { name: "Product registration", avg: 178, penetration: "~10 of 93 accounts", body: "94% active rate. Post-installation registration on packaging or manuals captures customer data and opens the service relationship." }
+      ],
+      faqs: [
+        { q: "What's a typical QR code scan rate in manufacturing?", a: "The median active code earns 8 scans; the average is 641, pulled up sharply by outliers." },
+        { q: "What percentage of manufacturing QR codes actually get scanned?", a: "79.8% are active; 20.2% have never been scanned." },
+        { q: "How concentrated is QR code performance in manufacturing?", a: "Extremely — just 0.48% of codes generate 84.7% of all scans, the steepest concentration curve of any industry in this study." },
+        { q: "Does customer tenure affect QR code performance in manufacturing?", a: "Generally yes — 6+ year accounts average 5,691 scans per code, about 6× the newest cohort — though the relationship isn't perfectly linear across the middle tenure bands." },
+        { q: "Does custom QR code design improve scan performance in manufacturing?", a: "Barely — designer and black-and-white codes both post a median of 8 scans; the average gap is account-driven, not design-driven." },
+        { q: "Which QR code use case performs best in manufacturing?", a: "Promotional campaign codes, averaging 2,578 scans per active code — 2.8× the brand-website baseline — though run by fewer than 10 of 93 accounts." },
+        { q: "Are dynamic QR codes better than static ones in manufacturing?", a: "Yes — 98.1% of scanning codes are dynamic; static codes recorded next to no scan activity in this segment." },
+        { q: "How long do manufacturing QR codes stay active?", a: "The average live code has been in market 2.5 years, and some of the oldest are still scanning after 8.2+ years." },
+        { q: "Which account type gets the most scans per manufacturing QR code?", a: "Pro-tier accounts, averaging 1,876 scans per code — and with 47 of the 93 accounts on this plan, they drive most of the segment's scans." }
       ]
     },
 
@@ -302,6 +322,15 @@ const REPORT = {
         { name: "Booking / reservation", avg: 2784, penetration: "~15 of 52 properties", body: "Direct-booking codes on property materials and in-room surfaces drive high-intent traffic at a 90% active rate — and route bookings around OTA commissions." },
         { name: "Guest review / feedback", avg: 2585, penetration: "~20 of 52 properties", body: "96% active rate — the highest in the segment. Review codes on tables, receipts, and checkout desks generate sustained recurring scans." },
         { name: "Document / information", avg: 2113, penetration: "~25 of 52 properties", body: "Property guides and spa brochures as PDF codes out-earn hotel-website codes — and replace collateral that's otherwise reprinted every season." }
+      ],
+      faqs: [
+        { q: "What is a good QR code scan rate for hotels and resorts?", a: "The median active code earns 23 scans — the highest median of any industry studied; the average, 2,096, is pulled up less dramatically here than elsewhere." },
+        { q: "Which QR code use case gets the most scans in hospitality?", a: "By total share, menu/dining leads by far — 17.7% of codes drive 43.4% of all scans. By per-code average, app-download codes edge slightly higher (5,310 vs 5,076), though on a much smaller share of the portfolio." },
+        { q: "Do custom-designed QR codes outperform plain black-and-white codes in hotels?", a: "Barely — medians are nearly identical (23 vs 22); unlike other industries, no single outlier account distorts this comparison." },
+        { q: "How long do hotel QR codes stay active before they stop getting scanned?", a: "The average live code has been in market 2.4 years, and the oldest are still scanning after 9.3+ years." },
+        { q: "Does customer tenure affect QR code performance in hospitality?", a: "Through the middle tenure bands, yes — 4–6 year accounts average 6,847 scans per code, the segment's highest — though the 6+ year figure reflects a single account and is better read as an anecdote than a benchmark." },
+        { q: "What percentage of hotel QR codes never get scanned?", a: "15.1% — the lowest zero-scan rate of any industry in this study." },
+        { q: "What's the highest scan count recorded on a single hotel QR code?", a: "544,749 scans, on a resort property-information code." }
       ]
     },
 
@@ -390,6 +419,16 @@ const REPORT = {
         { name: "Consumer survey / feedback", avg: 1397, penetration: "< 10 of 38 accounts", body: "90% active rate — post-purchase NPS and product feedback on packaging consistently generates traffic and first-party data." },
         { name: "Traceability / origin", avg: 516, penetration: "~6 of 38 accounts", body: "Farm-to-fork traceability is a rising consumer expectation and regulatory requirement (EUDR, GS1 Digital Link). Penetration today is minimal." },
         { name: "Recipe / how-to", avg: 195, penetration: "~8 of 38 accounts", body: "84% active rate. Recipe codes drive repeat scans and brand engagement — one of the most natural F&B packaging use cases, barely deployed." }
+      ],
+      faqs: [
+        { q: "What is a good QR code scan rate for food & beverage manufacturers?", a: "The median active code earns 16 scans; the average, 1,487, is pulled up by a small set of high-traffic consumer codes." },
+        { q: "What share of F&B manufacturing QR codes are compliance codes?", a: "Document/spec-sheet codes — largely compliance and regulatory labeling — are 33.7% of the portfolio but just 0.7% of scans." },
+        { q: "Which QR code use case has the highest engagement in F&B manufacturing?", a: "App-download codes, averaging 9,382 scans per active code — the highest in the industry — though deployed by fewer than 5 of 38 manufacturers." },
+        { q: "Do custom-designed QR codes outperform black-and-white codes on food packaging?", a: "No — F&B reverses the pattern seen elsewhere: black-and-white codes out-scan designer codes at the median (23 vs 11), since top consumer brands here tend to ship plain codes while designer codes cluster in low-traffic document contexts." },
+        { q: "Does customer tenure affect QR code performance for F&B manufacturers?", a: "Uniquely in this industry, no — per-code performance stays flat (roughly 2,400–3,500 scans) across every tenure band; use-case mix drives performance here, not account age." },
+        { q: "How concentrated is scan volume in F&B manufacturing?", a: "1.49% of codes generate 83.8% of all scans." },
+        { q: "How long do F&B manufacturing QR codes stay active?", a: "The average live code has been in market 2.35 years, and the oldest are still scanning after 10.5+ years." },
+        { q: "What's the highest scan count recorded on a single F&B QR code?", a: "749,734 scans, on a global wine brand's website code." }
       ]
     }
   }

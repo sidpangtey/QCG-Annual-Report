@@ -34,6 +34,7 @@
           <a role="menuitem" href="#use-cases">05 · Use cases</a>
           <a role="menuitem" href="#opportunities">06 · Opportunities</a>
           <a role="menuitem" href="#move-up-curve">07 · Move up the curve</a>
+          <a role="menuitem" href="#faq">08 · FAQ</a>
         </div>
       </div>
       <a href="#get-report">Get the report</a>
@@ -232,6 +233,16 @@
     <h2 style="max-width:24ch">How to move up the curve in <span id="mu-industry"></span></h2>
     <p class="lede" id="mu-lede"></p>
     <div class="curve" id="mu-rungs"></div>
+  </div>
+</section>
+
+<!-- ============ 08 FAQ ============ -->
+<section class="band" id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Chapter 08 · Frequently asked</p>
+    <h2 style="max-width:24ch">QR Code benchmarks for <span id="faq-industry"></span>, answered</h2>
+    <p class="lede" id="faq-lede"></p>
+    <div class="faq" id="faq-list"></div>
   </div>
 </section>
 
@@ -565,6 +576,46 @@ document.getElementById("age-story").textContent = D.longevity.story;
     wrap.appendChild(el);
     io.observe(el);
   });
+})();
+
+/* ---------- 08 FAQ (industry-specific, data-driven, FAQPage JSON-LD for AEO) ---------- */
+(function(){
+  document.getElementById("faq-industry").textContent = D.shortName;
+  document.getElementById("faq-lede").textContent =
+    `Straight answers to the questions brand and marketing teams ask about QR Code performance in ${D.shortName}, drawn from the first-party data on this page.`;
+
+  const list = document.getElementById("faq-list");
+  D.faqs.forEach((f,i)=>{
+    const item = document.createElement("div");
+    item.className = "faq-item";
+    item.setAttribute("aria-expanded", "false");
+    item.innerHTML = `
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a-${i}" id="faq-q-${i}">
+        <span>${f.q}</span><span class="sign" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a" role="region" aria-labelledby="faq-q-${i}" id="faq-a-${i}"><div class="faq-a-inner">${f.a}</div></div>`;
+    list.appendChild(item);
+    const btn = item.querySelector(".faq-q");
+    btn.addEventListener("click", ()=>{
+      const open = item.getAttribute("aria-expanded") === "true";
+      item.setAttribute("aria-expanded", String(!open));
+      btn.setAttribute("aria-expanded", String(!open));
+    });
+  });
+
+  /* FAQPage JSON-LD — lets search/AI engines lift these as answers */
+  const schema = {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity": D.faqs.map(f=>({
+      "@type":"Question","name":f.q,
+      "acceptedAnswer":{"@type":"Answer","text":f.a}
+    }))
+  };
+  const s = document.createElement("script");
+  s.type = "application/ld+json";
+  s.textContent = JSON.stringify(schema);
+  document.head.appendChild(s);
 })();
 
 /* ---------- get report ---------- */
